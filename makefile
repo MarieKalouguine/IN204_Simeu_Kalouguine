@@ -1,9 +1,9 @@
 CC = g++
 
-all: test.out
+all: test.exe
 
-test.out : objects.h test_objects.cpp
+test.exe : objects.h test_objects.cpp
 	$(CC) -o $@ $^
 
 clean :
-	rm -rf *.o *.out core
+	rm -rf *.o *.exe core

@@ -3,6 +3,6 @@
 
 int main()
 {
-	Sphere S(1,1,1,5);
+	Sphere S(Coordinate(1,1,1),5, 0.1);
 	S.print();
 }
