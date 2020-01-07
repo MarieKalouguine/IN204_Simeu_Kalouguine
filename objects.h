@@ -47,4 +47,28 @@ private:
 	unsigned width, height;	//width and height of the rendered image
 };
 
+class Light_source
+{
+public:
+	virtual Ray ray_to_point(Dot P);
+};
+
+class Lamp : Light_source
+{
+public:
+	Lamp(Dot O, float i): O(O), intensivity(i) {};
+private:
+	Dot O;	//position of the lamp
+	float intensivity;
+};
+
+class Sun : Light_source
+{
+public:
+	Sun(Ray d, float i): direction(d), intensivity(i) {};
+private:
+	Ray direction;	//all the rays from the sun are parallel to this ray
+	float intensivity;
+};
+
 #endif
