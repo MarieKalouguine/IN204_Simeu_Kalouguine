@@ -1,7 +1,8 @@
 #include "objects.hpp"
+#include "intersect.hpp"
 
-Point compute_intersect(Ray ray, Sphere sphere)
+Point Sphere::compute_intersect(Ray ray) const
 {
-	
+	ray.unitarize();
 	return Point(1,1,2);
 }

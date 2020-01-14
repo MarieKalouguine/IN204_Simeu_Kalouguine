@@ -9,7 +9,7 @@ main : objects.o test.o intersect.o
 %.o : %.cpp
 	$(CC) $(FLAGS) -c $^
 
-test.cpp : objects.hpp
+test.cpp : objects.hpp intersect.hpp
 objects.cpp : objects.hpp
 intersect.cpp : intersect.hpp objects.hpp
 

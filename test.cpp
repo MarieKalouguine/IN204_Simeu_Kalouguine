@@ -1,5 +1,6 @@
 #include <iostream>
 #include "objects.hpp"
+#include "intersect.hpp"
 
 int main()
 {

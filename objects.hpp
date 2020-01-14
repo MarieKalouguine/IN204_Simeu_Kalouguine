@@ -58,6 +58,7 @@ class Sphere
 {
 public:
 	Sphere(const Point& O , double r, float reflex): origin(O), ray(r), reflexivity(reflex) {};
+	Point compute_intersect(Ray ray) const;
 	void print() const
 	{
 		origin.print();
