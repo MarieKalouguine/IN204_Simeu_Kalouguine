@@ -14,7 +14,7 @@ public:
 		return Point(x+P.x, y+P.y, z+P.z); }
 	Point operator-(const Point& P) const {
 		return Point(x-P.x, y-P.y, z-P.z); }
-	Point translate_by(const Ray&) const;
+	Point translate_by(const Ray&) const;	//creates a new point, translated from the initial point by a given vector/ray
 private:
 	double x, y, z;
 };
@@ -32,7 +32,7 @@ public:
 		std::cout << '\n';
 	}
 	Ray operator-() const {
-		return Ray(Dir, Origin); }
+		return Ray(Dir, Origin); }	//Same ray in the opposite direction
 private:
 	Point Origin, Dir;	// Origin is where the ray starts, Dir is any point on the ray (indicates direction)
 };
@@ -65,25 +65,25 @@ private:
 class Light_source
 {
 public:
-	Light_source(double i): intensivity(i) {};
-	virtual Ray ray_from_point(const Point&) const = 0;
+	Light_source(double b): brightness(b) {};
+	virtual Ray ray_from_point(const Point&) const = 0;		//this methods creates a ray from a given point to the light source
 protected:
-	double intensivity;
+	double brightness;
 };
 
-class Lamp : public Light_source
+class Lamp : public Light_source	//A light source with a stable position
 {
 public:
-	Lamp(const Point& O, double i): Light_source(i), Origin(O) {};
+	Lamp(const Point& O, double b): Light_source(b), Origin(O) {};
 	Ray ray_from_point(const Point&) const;
 private:
 	Point Origin;	//position of the lamp
 };
 
-class Sun : public Light_source
+class Sun : public Light_source		//A light source at infinite position
 {
 public:
-	Sun(const Ray& d, double i): Light_source(i), direction(d) {};
+	Sun(const Ray& d, double b): Light_source(b), direction(d) {};
 	Ray ray_from_point(const Point&) const;
 	void print() const {
 		direction.print(); }
