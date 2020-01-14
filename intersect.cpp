@@ -8,7 +8,6 @@ Point* Sphere::compute_intersect(Ray ray) const
 	Ray PC(ray.origin, center);	//vector between the origin of the ray and the center of the circle
 	double distPH = PC*ray;	//scalar product
 	double distCHsq = ray.origin.square_distance_to(center) - distPH*distPH;
-	std::cout << distCHsq << std::endl;
 	double distIHsq = size*size-distCHsq;	//I is the intersection point
 	if (distIHsq >=0)
 	{

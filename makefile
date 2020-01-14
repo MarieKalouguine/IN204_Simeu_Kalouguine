@@ -1,19 +1,15 @@
-CC = g++
 FLAGS = -Wall -std=c++11
 
-OBJ = objects.o test.o intersect.o
+SRCFILES = objects.cpp test.cpp intersect.cpp
+OBJFILES=$(SRCFILES:%.cpp=%.o)
 
 all: main
 
-main : $(OBJ)
-	$(CC) $(FLAGS) -o $@ $^
+main : $(OBJFILES)
+	g++ $(FLAGS) -o $@ $^
 
-%.o : %.cpp objects.hpp
-	$(CC) $(FLAGS) -c $^
-
-test.cpp : objects.hpp
-objects.cpp : objects.hpp
-intersect.cpp : objects.hpp
+.cpp.o : objects.hpp
+	g++ $(FLAGS) -c $<
 
 
 clean :
