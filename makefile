@@ -3,15 +3,16 @@ FLAGS = -Wall -std=c++11
 
 all: main
 
-main : objects.o test.o
+main : objects.o test.o intersect.o
 	$(CC) $(FLAGS) -o $@ $^
+	
+%.o : %.cpp
+	$(CC) $(FLAGS) -c $^
 
-objects.o : objects.cpp objects.hpp
-	$(CC) $(FLAGS) -c $<
+test.cpp : objects.hpp
+objects.cpp : objects.hpp
+intersect.cpp : intersect.hpp objects.hpp
 
-
-test.o : test.cpp objects.hpp
-	$(CC) $(FLAGS) -c $<
 
 clean :
 	rm -rf *.o core main *.gch
