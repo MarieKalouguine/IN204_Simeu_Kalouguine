@@ -8,7 +8,7 @@ all: main
 main : $(OBJ)
 	$(CC) $(FLAGS) -o $@ $^
 
-%.o : %.cpp
+%.o : %.cpp objects.hpp
 	$(CC) $(FLAGS) -c $^
 
 test.cpp : objects.hpp

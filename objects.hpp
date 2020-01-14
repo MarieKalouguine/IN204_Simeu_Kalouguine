@@ -12,7 +12,8 @@ public:
 	Point(double x, double y, double z): x(x), y(y), z(z) {};
 	double square_distance_to(const Point&) const;
 	void print() const {
-		std::cout << "(" << x << ", " << y << ", " << z << ")"; }
+		std::cout << "(" << x << ", " << y << ", " << z << ")";
+	}
 	Point operator+(const Point& P) const {
 		return Point(x+P.x, y+P.y, z+P.z);
 	}
@@ -47,12 +48,21 @@ public:
 		dir.print();
 		std::cout << '\n';
 	}
-	Ray operator-() const {
+	Ray operator-() const
+	{
 		return Ray(dir, origin);
 	}	//Same ray in the opposite direction
 	double operator*(Ray r) const	//scalar product
 	{
 		return (dir-origin)*(r.dir-r.origin);
+	}
+	Ray operator*(double k) const
+	{
+		return Ray(origin, origin+(dir-origin)*k);
+	}
+	Ray operator/(double k) const
+	{
+		return Ray(origin, origin+(dir-origin)/k);
 	}
 	double length() {
 		return origin.square_distance_to(dir);
@@ -71,7 +81,8 @@ class Sphere
 {
 public:
 	Sphere(const Point& O , double r, float reflex): center(O), size(r), reflexivity(reflex) {};
-	Point compute_intersect(Ray ray) const;
+	Point* compute_intersect(Ray) const;
+	friend class Point;
 	void print() const
 	{
 		center.print();
