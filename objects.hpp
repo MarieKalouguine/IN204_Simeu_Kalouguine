@@ -70,15 +70,15 @@ private:
 class Sphere
 {
 public:
-	Sphere(const Point& O , double r, float reflex): origin(O), size(r), reflexivity(reflex) {};
+	Sphere(const Point& O , double r, float reflex): center(O), size(r), reflexivity(reflex) {};
 	Point compute_intersect(Ray ray) const;
 	void print() const
 	{
-		origin.print();
+		center.print();
 		std::cout << "Ray: " << size << "\nReflexivity: " << reflexivity << std::endl;
 	}
 private:
-	Point origin;
+	Point center;
 	double size;
 	float reflexivity;
 };
