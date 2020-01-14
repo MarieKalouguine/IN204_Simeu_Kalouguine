@@ -2,13 +2,15 @@
 #define OBJECTS_HPP
 
 #include <iostream>
+#include <math.h>
 class Ray;
+class Sphere;
 
 class Point
 {
 public:
 	Point(double x, double y, double z): x(x), y(y), z(z) {};
-	double distance_to(const Point&) const;
+	double square_distance_to(const Point&) const;
 	void print() const {
 		std::cout << "(" << x << ", " << y << ", " << z << ")"; }
 	Point operator+(const Point& P) const {
@@ -23,6 +25,9 @@ public:
 	Point operator/(double k) const {
 		return Point(x/k, y/k, z/k);
 	}
+	double operator*(Point A) const {	//scalar product
+		return x*A.x + y*A.y + z*A.z;
+	}
 	Point translate_by(const Ray&) const;	//creates a new point, translated from the initial point by a given vector/ray
 private:
 	double x, y, z;
@@ -33,7 +38,8 @@ class Ray	// it is more of a vector, since it's defined by two points
 {
 public:
 	Ray(const Point& O , const Point& D): origin(O), dir(D) {};
-	friend Point Point::translate_by(const Ray&) const;
+	friend class Point;
+	friend class Sphere;
 	void print() const
 	{
 		origin.print();
@@ -44,10 +50,17 @@ public:
 	Ray operator-() const {
 		return Ray(dir, origin);
 	}	//Same ray in the opposite direction
+	double operator*(Ray r) const	//scalar product
+	{
+		return (dir-origin)*(r.dir-r.origin);
+	}
+	double length() {
+		return origin.square_distance_to(dir);
+	}
 	void unitarize()
 	{
-		double length = origin.distance_to(dir);
-		dir = dir/length;
+		double length = sqrt(origin.square_distance_to(dir));
+		dir = origin+(dir-origin)/length;
 	}
 private:
 	Point origin, dir;	// origin is where the ray starts, dir is any point on the ray (indicates direction)
@@ -57,16 +70,16 @@ private:
 class Sphere
 {
 public:
-	Sphere(const Point& O , double r, float reflex): origin(O), ray(r), reflexivity(reflex) {};
+	Sphere(const Point& O , double r, float reflex): origin(O), size(r), reflexivity(reflex) {};
 	Point compute_intersect(Ray ray) const;
 	void print() const
 	{
 		origin.print();
-		std::cout << "Ray: " << ray << "\nReflexivity: " << reflexivity << std::endl;
+		std::cout << "Ray: " << size << "\nReflexivity: " << reflexivity << std::endl;
 	}
 private:
 	Point origin;
-	double ray;
+	double size;
 	float reflexivity;
 };
 
