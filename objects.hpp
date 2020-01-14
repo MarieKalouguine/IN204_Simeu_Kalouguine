@@ -8,16 +8,26 @@ class Point
 {
 public:
 	Point(double x, double y, double z): x(x), y(y), z(z) {};
+	double distance_to(const Point&) const;
 	void print() const {
 		std::cout << "(" << x << ", " << y << ", " << z << ")"; }
 	Point operator+(const Point& P) const {
-		return Point(x+P.x, y+P.y, z+P.z); }
+		return Point(x+P.x, y+P.y, z+P.z);
+	}
 	Point operator-(const Point& P) const {
-		return Point(x-P.x, y-P.y, z-P.z); }
+		return Point(x-P.x, y-P.y, z-P.z);
+	}
+	Point operator*(double k) const {
+		return Point(x*k, y*k, z*k);
+	}
+	Point operator/(double k) const {
+		return Point(x/k, y/k, z/k);
+	}
 	Point translate_by(const Ray&) const;	//creates a new point, translated from the initial point by a given vector/ray
 private:
 	double x, y, z;
 };
+
 
 class Ray	// it is more of a vector, since it's defined by two points
 {
@@ -32,7 +42,13 @@ public:
 		std::cout << '\n';
 	}
 	Ray operator-() const {
-		return Ray(dir, origin); }	//Same ray in the opposite direction
+		return Ray(dir, origin);
+	}	//Same ray in the opposite direction
+	void unitarize()
+	{
+		double length = origin.distance_to(dir);
+		dir = dir/length;
+	}
 private:
 	Point origin, dir;	// origin is where the ray starts, dir is any point on the ray (indicates direction)
 };
@@ -86,7 +102,8 @@ public:
 	Sun(const Ray& d, double b): Light_source(b), direction(d) {};
 	Ray ray_from_point(const Point&) const;
 	void print() const {
-		direction.print(); }
+		direction.print();
+	}
 private:
 	Ray direction;	//all the rays from the sun are parallel to this ray
 };
