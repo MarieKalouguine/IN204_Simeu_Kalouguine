@@ -1,16 +1,19 @@
 FLAGS = -Wall -std=c++11
 
 SRCFILES = objects.cpp test.cpp intersect.cpp
-OBJFILES=$(SRCFILES:%.cpp=%.o)
+OBJFILES=$(SRCFILES:%.cpp=$(OBJPATH)%.o)
+OBJPATH=./obj/
+SRCPATH=./src/
 
 all: main
 
 main : $(OBJFILES)
 	g++ $(FLAGS) -o $@ $^
 
-.cpp.o : objects.hpp
-	g++ $(FLAGS) -c $<
+$(OBJPATH)%.o : $(SRCPATH)%.cpp $(SRCPATH)objects.hpp
+	@mkdir -p $(OBJPATH)
+	(cd $(OBJPATH); g++ $(FLAGS) -c ../$<)
 
 
 clean :
-	rm -rf *.o core main *.gch
+	rm -rf $(OBJPATH) core main *.gch
