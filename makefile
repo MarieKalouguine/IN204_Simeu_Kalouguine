@@ -2,7 +2,7 @@ FLAGS = -Wall -std=c++11
 
 SRCPATH=./src/
 OBJPATH=./obj/
-OBJFILES = $(OBJPATH)objects.o $(OBJPATH)test.o $(OBJPATH)intersect.o
+OBJFILES = $(addprefix $(OBJPATH), objects.o test.o intersect.o)
 
 all: main
 
