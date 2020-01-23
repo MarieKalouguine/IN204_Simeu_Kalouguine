@@ -1,9 +1,8 @@
 FLAGS = -Wall -std=c++11
 
-SRCFILES = objects.cpp test.cpp intersect.cpp
-OBJFILES=$(SRCFILES:%.cpp=$(OBJPATH)%.o)
-OBJPATH=./obj/
 SRCPATH=./src/
+OBJPATH=./obj/
+OBJFILES = $(OBJPATH)objects.o $(OBJPATH)test.o $(OBJPATH)intersect.o
 
 all: main
 
