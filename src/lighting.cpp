@@ -1,3 +1,4 @@
 #include "objects.hpp"
+#include "environment.hpp"
 
-float Lighting () 
+float lighting(Point P, Sphere S, Environment world);
