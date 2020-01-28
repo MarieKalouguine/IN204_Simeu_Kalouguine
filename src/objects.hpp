@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <math.h>
+
 class Ray;
 class Sphere;
 
@@ -98,6 +99,7 @@ class Camera
 {
 	public:
 		Camera(const Point& O, const Point& M, unsigned w, unsigned h): origin(O), Image_center(M), width(w), height(h) {};
+		Camera(): origin(Point(0,0,1)), Image_center(Point(1,1,1)), width(400), height(300) {};
 	
 	private:
 		Point origin, Image_center;	//origin of the camera, and center of the projection plane
