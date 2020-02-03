@@ -6,6 +6,7 @@
 
 class Ray;
 class Sphere;
+class Environment;
 
 class Point
 {
@@ -42,6 +43,8 @@ public:
 	Ray(const Point& O , const Point& D): origin(O), dir(D) {};
 	friend class Point;
 	friend class Sphere;
+	friend Point* compute_intersect(Ray, Sphere);
+	Point* first_intersect(const Environment&) const;
 	void print() const
 	{
 		origin.print();
@@ -82,8 +85,8 @@ class Sphere
 {
 public:
 	Sphere(const Point& O , double r, float reflex): center(O), size(r), reflexivity(reflex) {};
-	Point* compute_intersect(Ray) const;
 	friend class Point;
+	friend Point* compute_intersect(Ray ray, Sphere S);
 	void print() const
 	{
 		center.print();
