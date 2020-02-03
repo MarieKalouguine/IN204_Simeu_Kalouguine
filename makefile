@@ -2,7 +2,7 @@ FLAGS = -Wall -std=c++11
 
 SRCPATH=./src/
 OBJPATH=./obj/
-OBJFILES = $(addprefix $(OBJPATH), objects.o test.o intersect.o lighting.o)
+OBJFILES = $(addprefix $(OBJPATH), objects.o test.o intersect.o first_intersect.o lighting.o initialization.o)
 HEADERS = $(addprefix $(SRCPATH), objects.hpp environment.hpp)
 
 all: main
@@ -16,4 +16,4 @@ $(OBJPATH)%.o : $(SRCPATH)%.cpp $(HEADERS)
 
 
 clean :
-	rm -rf $(OBJPATH) core main *.gch
+	rm -rf $(OBJPATH) core main
