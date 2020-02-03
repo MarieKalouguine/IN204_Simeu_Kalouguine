@@ -32,4 +32,5 @@ void Ray::first_intersect(const Environment& world, Point** P_min, unsigned int*
 			}
 		}
 	}
+	if (there_is_no_intersection) *P_min=0;
 }
