@@ -7,10 +7,15 @@ int main()
 {	
 	Environment world = initialization();
 	
-	Ray r(Point(0.5, 0, -1), Point(0.5, 0, 1));
-	Point* I = r.first_intersect(world);
+	Ray r(Point(-3, -1, 1), Point(0,0,0));
+	Point* I = (Point*)malloc(sizeof(Point));
+	unsigned int index=0;
+	r.first_intersect(world, &I, &index);
 	if (I!=0)
 	{
+		std::cout<<"Intersection : ";
 		I->print();
+		double color = world.lighting(*I, *world.get_scene()[index]);
+		std::cout<<"\nEclairage : "<<color<<std::endl;
 	}
 }
