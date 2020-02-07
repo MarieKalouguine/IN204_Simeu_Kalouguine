@@ -2,7 +2,7 @@ FLAGS = -Wall -std=c++11
 
 SRCPATH=./src/
 OBJPATH=./obj/
-OBJFILES = $(addprefix $(OBJPATH), test.o math_objects.o shape.o light_source.o environment.o initialization.o)
+OBJFILES = $(addprefix $(OBJPATH), test.o math_objects.o shape.o light_source.o camera.o environment.o initialization.o)
 HEADERS = $(addprefix $(SRCPATH), math_objects.hpp shape.hpp light_source.hpp environment.hpp camera.hpp)
 
 all: main
