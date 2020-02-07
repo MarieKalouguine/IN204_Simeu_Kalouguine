@@ -11,14 +11,13 @@ int main()
 	Environment world = initialization();
 	
 	Ray r(Point(-3, -1, 1), Point(0,0,0));
-	Point* I = (Point*)malloc(sizeof(Point));
-	unsigned int index=0;
-	r.first_intersect(world, &I, &index);
-	if (I!=0)
+	Point I;
+	int index = world.find_first_intersect(r, I);
+	if (index!=-1)
 	{
 		std::cout<<"Intersection : ";
-		I->print();
-		double color = world.lighting(*I, *world.get_scene()[index]);
-		std::cout<<"\nEclairage : "<<color<<std::endl;
+		I.print();
+		double bw_color = world.lighting(I, *world.get_scene()[index]);
+		std::cout<<"\nEclairage : "<<bw_color<<std::endl;
 	}
 }

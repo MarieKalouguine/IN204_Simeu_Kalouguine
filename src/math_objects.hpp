@@ -4,6 +4,8 @@
 #include <iostream>
 #include <math.h>
 
+class Ray;
+
 /**
  * A point as a purely mathematical object, defined by three coordinates
  */
@@ -11,16 +13,17 @@ class Point
 {
 public:
 	Point(double x, double y, double z): x(x), y(y), z(z) {};
+	Point(): x(0), y(0), z(0) {};
 	
-	double get_x()
+	double get_x() const
 	{
 		return x;
 	}
-	double get_y()
+	double get_y() const
 	{
 		return y;
 	}
-	double get_z()
+	double get_z() const
 	{
 		return z;
 	}
@@ -59,11 +62,11 @@ class Ray
 public:
 	Ray(const Point& O , const Point& D): origin(O), dir(D) {};
 	
-	Point get_origin()
+	Point get_origin() const
 	{
 		return origin;
 	}
-	Point get_dir()
+	Point get_dir() const
 	{
 		return dir;
 	}
@@ -94,10 +97,16 @@ public:
 	double length() {
 		return origin.square_distance_to(dir);
 	}
+	
 	void unitarize()
 	{
 		double length = sqrt(origin.square_distance_to(dir));
 		dir = origin+(dir-origin)/length;
+	}
+	Ray unitarized() const
+	{
+		double length = sqrt(origin.square_distance_to(dir));
+		return Ray(origin, origin+(dir-origin)/length);
 	}
 private:
 	Point origin, dir;	// origin is where the ray starts, dir is any point on the ray (indicates direction)
@@ -111,22 +120,22 @@ private:
 class Camera
 {
 public:
-	Camera(const Point& O, const Point& M, unsigned w, unsigned h): origin(O), Image_center(M), width(w), height(h) {};
-	Camera(): origin(Point(0,0,1)), Image_center(Point(1,1,1)), width(400), height(300) {};
+	Camera(const Point& O, const Point& M, unsigned w, unsigned h): origin(O), image_center(M), width(w), height(h) {};
+	Camera(): origin(Point(0,0,1)), image_center(Point(1,1,1)), width(400), height(300) {};
 	
-	Point get_origin()
+	Point get_origin() const
 	{
 		return origin;
 	}
-	Point get_image_center()
+	Point get_image_center() const
 	{
 		return image_center;
 	}
-	unsigned get_width()
+	unsigned get_width() const
 	{
 		return width;
 	}
-	unsigned get_height()
+	unsigned get_height() const
 	{
 		return height;
 	}
