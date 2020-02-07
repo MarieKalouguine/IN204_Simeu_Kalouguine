@@ -1,5 +1,9 @@
 #include "shape.hpp"
 
+/**
+ * Returns if the shape is crossed by the ray.
+ * The intersection point is return through the reference I.
+ */
 bool Sphere::is_crossed (const Ray& ray, Point& I) const
 {
 	Point ray_origin = ray.get_origin();
@@ -17,6 +21,9 @@ bool Sphere::is_crossed (const Ray& ray, Point& I) const
 		return false;
 }
 
+/**
+ * Returns the unitary vector that is normal to the surface of the shape, in a given point P.
+ */
 Ray Sphere::get_normal_vect(const Point& P) const
 {
 	Ray vect1(center, P);

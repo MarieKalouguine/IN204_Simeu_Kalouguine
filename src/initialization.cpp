@@ -7,6 +7,10 @@
 
 using namespace tinyxml2;
 
+/**
+ * Currently initializes an environment with some objects.
+ * TODO: Initialize from an XML document.
+ */
 Environment initialization()
 {
 	auto S1 = shared_ptr<Shape>(new Sphere(Color(), 0, Point(30,30,30), 1));

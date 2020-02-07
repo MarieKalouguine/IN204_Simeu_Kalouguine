@@ -1,6 +1,9 @@
 #include "environment.hpp"
 
-
+/**
+ * Returns the first intersection of a ray with any shape the is in the world.
+ * If existing, the intersection is returned through the Point reference P_min.
+ */
 int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 {
 	int index = -1;
@@ -30,16 +33,22 @@ int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 	return index;
 }
 
-
+/**
+ * Returns the brightness of a point on a sphere, considering only direct lighting
+ */
 double Environment::lighting(const Point& P, const Shape& S) const
 {
 	double result = 0;
-	unsigned int i;
-	for(i = 0; i < lights.size(); i++)
+	int i;
+	for(i = 0; i < (int)lights.size(); i++)
 	{
-		Ray vect = lights[i]->ray_from_point(P);
-		vect.unitarize();
-		result = result + max(0.0, vect*S.get_normal_vect(P));	//scalar product
+		Ray ray = lights[i]->ray_from_point(P);
+		Point P2;
+		if (find_first_intersect(ray, P2)==i)	// if there is no other shape between the light source and the point P
+		{
+			ray.unitarize();
+			result = result + max(0.0, ray*S.get_normal_vect(P));	//scalar product
+		}
 	}
 	
 	return result;
