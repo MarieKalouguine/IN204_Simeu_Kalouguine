@@ -1,5 +1,8 @@
 #include <iostream>
-#include "objects.hpp"
+
+#include "math_objects.hpp"
+#include "shape.hpp"
+#include "light_source.hpp"
 #include "environment.hpp"
 #include "initialization.hpp"
 
