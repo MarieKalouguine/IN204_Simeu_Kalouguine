@@ -4,9 +4,9 @@
 #include <vector>
 #include <memory>
 
-#include "math_objects.hpp"
 #include "shape.hpp"
 #include "light_source.hpp"
+#include "camera.hpp"
 
 using namespace std;
 

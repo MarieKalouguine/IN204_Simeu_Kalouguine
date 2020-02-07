@@ -45,7 +45,7 @@ public:
 		return reflexivity;
 	}
 	virtual bool is_crossed (const Ray&, Point&) const = 0;
-	virtual Ray get_normal_vect(const Point&) const;
+	virtual Ray get_normal_vect(const Point&) const = 0;
 private:
 	Color color;
 	float reflexivity;

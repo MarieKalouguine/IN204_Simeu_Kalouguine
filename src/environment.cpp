@@ -14,7 +14,7 @@ int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 	}
 	
 	int i;
-	for(i = 1; i < scene_objects.size(); i++)
+	for(i = 1; i < (int)scene_objects.size(); i++)
 	{
 		if (scene_objects[i]->is_crossed (ray, P))
 		{
@@ -33,15 +33,13 @@ int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 
 double Environment::lighting(const Point& P, const Shape& S) const
 {
-	vect1 = S.get_normal_vect(P);
-	
 	double result = 0;
 	unsigned int i;
 	for(i = 0; i < lights.size(); i++)
 	{
-		Ray vect2 = lights[i]->ray_from_point(P);
-		vect2.unitarize();
-		result = result + max(0.0, vect1*vect2);	//scalar product
+		Ray vect = lights[i]->ray_from_point(P);
+		vect.unitarize();
+		result = result + max(0.0, vect*S.get_normal_vect(P));	//scalar product
 	}
 	
 	return result;
