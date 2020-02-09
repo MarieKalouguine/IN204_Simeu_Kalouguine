@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<world>
+  <camera pxwidth="640" pxheight="480" width="10">
+    <origin>
+      <point x="0.123" y="3.45" z="7.89"/>
+    </origin>
+    <target>
+      <point x="10.123" y="13.45" z="27.89"/>
+    </target>
+  </camera>
+  <lights>
+    <sun brightness="1.0">
+      <point x="8.45" y="1.11" z="2.54"/>
+    </sun>
+    <lamp brightness="1.0">
+      <point x="6.56" y="-1.11" z="-2.54"/>
+    </lamp>
+  </lights>
+  <shapes>
+    <sphere color="red" albedo="0.5" size="2.01">
+      <point x="4.8976" y="5.7564" z="1.67"/>
+    </sphere>
+  </shapes>
+</world>

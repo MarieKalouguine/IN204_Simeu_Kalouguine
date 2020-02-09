@@ -30,25 +30,25 @@ private:
 };
 
 /**
- * Abstract class shape, containing color and reflexivity
+ * Abstract class shape, containing color and albedo (= reflexivity)
  */
 class Shape
 {
 public:
-	Shape(Color col, float reflex): color(col), reflexivity(reflex) {};
+	Shape(Color col, float alb): color(col), albedo(alb) {};
 	Color get_color() const
 	{
 		return color;
 	}
-	float get_reflexivity() const
+	float get_albedo() const
 	{
-		return reflexivity;
+		return albedo;
 	}
 	virtual bool is_crossed (const Ray&, Point&) const = 0;
 	virtual Ray get_normal_vect(const Point&) const = 0;
 private:
 	Color color;
-	float reflexivity;
+	float albedo;
 };
 
 /**
