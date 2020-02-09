@@ -4,7 +4,7 @@ SRCPATH=./src/
 OBJPATH=./obj/
 TESTPATH=./tests/
 OBJFILES = $(addprefix $(OBJPATH), test.o math_objects.o shape.o light_source.o camera.o environment.o initialization.o tinyxml2.o)
-HEADERS = $(addprefix $(SRCPATH), math_objects.hpp shape.hpp light_source.hpp environment.hpp camera.hpp tinyxml2.h)
+HEADERS = $(addprefix $(SRCPATH), math_objects.hpp shape.hpp light_source.hpp environment.hpp camera.hpp color.hpp tinyxml2.hpp)
 
 default: main
 

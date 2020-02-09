@@ -2,32 +2,7 @@
 #define SHAPE_HPP
 
 #include "math_objects.hpp"
-
-
-/**
- * Color is stored as a tuple of doubles (red, green, blue)
- */
-class Color
-{
-public:
-	Color(const float& R, const float& G, const float& B) : r(R), g(G), b(B) {}
-	Color() : r(0.5), g(0.5), b(0.5) {}
-	
-	float get_r() const
-	{
-		return r;
-	}
-	float get_g() const
-	{
-		return g;
-	}
-	float get_b() const
-	{
-		return b;
-	}
-private:
-	float r, g, b;
-};
+#include "color.hpp"
 
 /**
  * Abstract class shape, containing color and albedo (= reflexivity)

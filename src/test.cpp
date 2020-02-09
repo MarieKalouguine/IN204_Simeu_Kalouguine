@@ -9,16 +9,7 @@
 int main()
 {	
 	Environment world = initialization();
-	
-	Ray r(Point(-3, -1, 1), Point(0,0,0));
-	Point I;
-	int index = world.find_first_intersect(r, I);
-	if (index!=-1)
-	{
-		std::cout<<"Intersection : ";
-		I.print();
-		double bw_color = world.lighting(I, *world.get_scene()[index]);
-		std::cout<<"Eclairage : "<<bw_color<< "\n" << std::endl;
-		world.ray_from_pixel(220, 0).print();
-	}
+	unsigned x=250, y=17;
+	Color color = world.color_from_pixel(x, y);
+	std::cout<< "Couleur du pixel [" <<x<<","<<y<<"] : (" << color.get_r() << " ," << color.get_g() << " ," << color.get_b() <<")" << std::endl;
 }

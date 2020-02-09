@@ -12,10 +12,10 @@ using namespace tinyxml2;
  */
 Environment initialization()
 {
-	auto S1 = shared_ptr<Shape>(new Sphere(Color(), 0, Point(30,30,30), 1));
-	auto S2 = shared_ptr<Shape>(new Sphere(Color(), 0, Point(3,1,-1), 1));
+	auto S1 = shared_ptr<Shape>(new Sphere(Color(0.3,0.4,0.5), 0, Point(3,3,3), 1));
+	auto S2 = shared_ptr<Shape>(new Sphere(Color(0.5,0.4,0.3), 0, Point(3,1,-1), 1));
 	
-	Point d(2, 4, 7);
+	Point d(2, 1, 0.5);
 	auto sun = shared_ptr<Light_source>(new Sun(d, 1));
 	
 	Environment world = Environment();

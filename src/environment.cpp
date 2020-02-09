@@ -36,7 +36,7 @@ int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 /**
  * Returns the brightness of a point on a sphere, considering only direct lighting
  */
-double Environment::lighting(const Point& P, const Shape& S) const
+float Environment::lighting(const Point& P, const Shape& S) const
 {
 	double result = 0;
 	int i;
@@ -51,5 +51,17 @@ double Environment::lighting(const Point& P, const Shape& S) const
 		}
 	}
 	
-	return result;
+	return (float)result;
+}
+
+Color Environment::color_from_pixel(unsigned x, unsigned y) const
+{
+	Ray r = ray_from_pixel(x, y);
+	Point I;
+	int index =  find_first_intersect(r, I);
+	if (index!=-1)
+	{
+		return (*scene_objects[index]).get_color()*lighting(I, *scene_objects[index]);
+	}
+	return Color();
 }
