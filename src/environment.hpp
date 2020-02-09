@@ -33,6 +33,7 @@ class Environment
 		
 		int find_first_intersect(const Ray&, Point&) const;
 		double lighting(const Point&, const Shape&) const;
+		
 		Ray ray_from_pixel(unsigned x, unsigned y) const
 		{
 			return camera.ray_from_pixel(x, y);

@@ -40,10 +40,10 @@ private:
 class Sun : public Light_source		//A light source at infinite position
 {
 public:
-	Sun(const Ray& d, double b): Light_source(b), direction(d) {};
+	Sun(const Point& d, double b): Light_source(b), direction(d) {};
 	Ray ray_from_point(const Point&) const;
 private:
-	Ray direction;	//all the rays from the sun are parallel to this ray
+	Point direction;	//all the rays from the sun are parallel to the ray (0,0,0)->direction
 };
 
 #endif
