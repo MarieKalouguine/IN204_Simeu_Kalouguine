@@ -1,15 +1,14 @@
-#include <tinyxml2.h>
-
 #include "math_objects.hpp"
 #include "shape.hpp"
 #include "light_source.hpp"
 #include "environment.hpp"
+#include "tinyxml2.h"
 
 using namespace tinyxml2;
 
 /**
  * Currently initializes an environment with some objects.
- * TODO: Initialize from an XML document.
+ * TODO: Initialize from an XML document (inspiration from test_xml.cpp)
  */
 Environment initialization()
 {

@@ -18,6 +18,7 @@ int main()
 		std::cout<<"Intersection : ";
 		I.print();
 		double bw_color = world.lighting(I, *world.get_scene()[index]);
-		std::cout<<"\nEclairage : "<<bw_color<<std::endl;
+		std::cout<<"Eclairage : "<<bw_color<< "\n" << std::endl;
+		world.ray_from_pixel(220, 0).print();
 	}
 }

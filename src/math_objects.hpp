@@ -30,7 +30,7 @@ public:
 	
 	double square_distance_to(const Point&) const;
 	void print() const {
-		std::cout << "(" << x << ", " << y << ", " << z << ")";
+		std::cout << "(" << x << ", " << y << ", " << z << ")\n";
 	}
 	Point operator+(const Point& P) const {
 		return Point(x+P.x, y+P.y, z+P.z);
@@ -73,10 +73,9 @@ public:
 	
 	void print() const
 	{
-		origin.print();
+		std::cout << "(" << origin.get_x() << ", " << origin.get_y() << ", " << origin.get_y() << ")";
 		std::cout <<" -> ";
-		dir.print();
-		std::cout << '\n';
+		std::cout << "(" << dir.get_x() << ", " << dir.get_y() << ", " << dir.get_y() << ")\n";
 	}
 	Ray operator-() const
 	{
