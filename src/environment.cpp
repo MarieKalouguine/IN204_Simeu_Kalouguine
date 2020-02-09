@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "environment.hpp"
 
 /**
@@ -54,9 +56,8 @@ float Environment::lighting(const Point& P, const Shape& S) const
 	return (float)result;
 }
 
-Color Environment::color_from_pixel(unsigned x, unsigned y) const
+Color Environment::color_from_ray(Ray r) const
 {
-	Ray r = ray_from_pixel(x, y);
 	Point I;
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
@@ -64,4 +65,38 @@ Color Environment::color_from_pixel(unsigned x, unsigned y) const
 		return (*scene_objects[index]).get_color()*lighting(I, *scene_objects[index]);
 	}
 	return Color();
+}
+
+void Environment::raytracing() const
+{
+	std::vector<Color> img;
+	unsigned w = camera.get_widthpx();
+	unsigned h = camera.get_heightpx();
+	
+	std::ofstream ofs("image.txt", std::ios::out | std::ios::binary); 
+	for (unsigned i = 0; i < w; ++i)
+	{
+		for (unsigned j = 0; j < h; ++j)
+		{
+			Color c = color_from_ray(ray_from_pixel(i, j));
+			img.push_back(c);
+			ofs << std::to_string(c.get_r()) <<" "<< std::to_string(c.get_g()) <<" "<< std::to_string(c.get_b())<<"\n";
+		}
+	}
+	save_image("image.png", camera.get_widthpx(), camera.get_heightpx(), img);
+	ofs.close();
+}
+
+void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color> &img)
+{
+	std::ofstream ofs(filename.c_str(), std::ios::out | std::ios::binary);
+	ofs << "P6\n"
+	<< width << " " << height
+	<< "\n255\n";
+	for (unsigned i = 0; i < width * height; ++i)
+	{
+		ofs << img[i].get_r() << img[i].get_g() << img[i].get_b();
+		//printf("%d, %d, %d\n", img[i].get_r(), img[i].get_g(), img[i].get_b());
+	}
+	ofs.close();
 }

@@ -7,28 +7,30 @@
 class Color
 {
 public:
-	Color(const float& R, const float& G, const float& B) : r(R), g(G), b(B) {}
+	Color(const unsigned char& R, const unsigned char& G, const unsigned char& B) : r(R), g(G), b(B) {}
 	Color() : r(0), g(0), b(0) {}
 	
-	float get_r() const
+	unsigned char get_r() const
 	{
 		return r;
 	}
-	float get_g() const
+	unsigned char get_g() const
 	{
 		return g;
 	}
-	float get_b() const
+	unsigned char get_b() const
 	{
 		return b;
 	}
 	Color operator*(float k) const
 	{
+		//float R = (float)r*k, G = (float)g*k, B = (float)b*k;
+		//return Color((unsigned char)R, (unsigned char)G, (unsigned char)B);
 		return Color(r*k, g*k, b*k);
 	}
 	
 private:
-	float r, g, b;
+	unsigned char r, g, b;
 };
 
 #endif
