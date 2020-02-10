@@ -40,7 +40,7 @@ class Environment
 			return camera.ray_from_pixel(x, y);
 		}
 		
-		Color color_from_ray(Ray r) const;
+		Color<float> color_from_ray(Ray r) const;
 		void raytracing() const;
 		
 	private:
@@ -49,6 +49,6 @@ class Environment
 		Camera camera;
 };
 
-void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color> &img);
+void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color<float>> &img);
 
 #endif

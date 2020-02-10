@@ -12,8 +12,8 @@ using namespace tinyxml2;
  */
 Environment initialization()
 {
-	auto S1 = shared_ptr<Shape>(new Sphere(Color(255,0,0), 0, Point(9,11,-2), 1.5));	//red sphere
-	auto S2 = shared_ptr<Shape>(new Sphere(Color(0,255,0), 0, Point(10,10,2), 1.5));	//green sphere
+	auto S1 = shared_ptr<Shape>(new Sphere(Color<unsigned char>(255,0,0), 0, Point(9,11,-2), 1.5));	//red sphere
+	auto S2 = shared_ptr<Shape>(new Sphere(Color<unsigned char>(0,255,0), 0, Point(10,10,2), 1.5));	//green sphere
 	
 	Point d(0, -1, -5);
 	auto sun = shared_ptr<Light_source>(new Sun(d, 1));

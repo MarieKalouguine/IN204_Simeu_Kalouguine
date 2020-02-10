@@ -1,4 +1,5 @@
 #include <fstream>
+#include <algorithm>
 
 #include "environment.hpp"
 
@@ -41,7 +42,7 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 		Ray ray = lights[i]->ray_from_point(P);
 		Point P2;
 		int j = find_first_intersect(ray, P2);
-		if (j==-1 || j==index_shape)	// if there is no other shape between the light source and the point P
+		if (j==-1 || j==(int)index_shape)	// if there is no other shape between the light source and the point P
 		{
 			ray.unitarize();
 			result = result + max(0.0, ray*S.get_normal_vect(P)*lights[i]->get_brightness());	//scalar product
@@ -51,20 +52,20 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 	return (float)result;
 }
 
-Color Environment::color_from_ray(Ray r) const
+Color<float> Environment::color_from_ray(Ray r) const
 {
 	Point I;
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
 	{
-		return (*scene_objects[index]).get_color() * lighting(I, index);
+		return convert_to_float(scene_objects[index]->get_color()) * lighting(I, index);
 	}
-	return Color();
+	return Color<float>();
 }
 
 void Environment::raytracing() const
 {
-	std::vector<Color> img;
+	std::vector<Color<float>> img;
 	unsigned w = camera.get_widthpx();
 	unsigned h = camera.get_heightpx();
 	
@@ -72,22 +73,28 @@ void Environment::raytracing() const
 	{
 		for (unsigned i = 0; i < w; ++i)
 		{
-			Color c = color_from_ray(ray_from_pixel(i, j));
+			Color<float> c = color_from_ray(ray_from_pixel(i, j));
 			img.push_back(c);
 		}
 	}
 	save_image("image.png", camera.get_widthpx(), camera.get_heightpx(), img);
 }
 
-void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color> &img)
+void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color<float>> &img)
 {
 	std::ofstream ofs(filename.c_str(), std::ios::out | std::ios::binary);
 	ofs << "P6\n"
 	<< width << " " << height
 	<< "\n255\n";
+	float max_bright=255;
 	for (unsigned i = 0; i < width * height; ++i)
 	{
-		ofs << img[i].get_r() << img[i].get_g() << img[i].get_b();
+		max_bright = std::max(max_bright, std::max(img[i].get_r(), std::max(img[i].get_g(), img[i].get_b())));
+	}
+	for (unsigned i = 0; i < width * height; ++i)
+	{
+		Color<float> c = img[i]*(255/max_bright);
+		ofs << (unsigned char)c.get_r() << (unsigned char)c.get_g() << (unsigned char)c.get_b();
 	}
 	ofs.close();
 }
