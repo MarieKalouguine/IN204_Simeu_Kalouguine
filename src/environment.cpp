@@ -78,7 +78,7 @@ void Environment::raytracing() const
 			img.push_back(c);
 		}
 	}
-	save_image("image.png", camera.get_pxwidth(), camera.get_pxheight(), img);
+	save_image("image.ppm", camera.get_pxwidth(), camera.get_pxheight(), img);
 }
 
 void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color<float>> &img)
