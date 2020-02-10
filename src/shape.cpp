@@ -8,7 +8,7 @@ bool Sphere::is_crossed (const Ray& ray, Point& I) const
 {
 	Point ray_origin = ray.get_origin();
 	Ray PC(ray_origin, center);	//vector between the origin of the ray and the center of the sphere
-	double distPH = PC*ray;	//scalar product
+	double distPH = PC*ray.unitarized();	//scalar product
 	double distCHsq = ray_origin.square_distance_to(center) - distPH*distPH;
 	double distIHsq = size*size-distCHsq;	//I is the intersection point
 	if (distIHsq >=0)
