@@ -49,7 +49,7 @@ float Environment::lighting(const Point& P, const Shape& S) const
 		if (find_first_intersect(ray, P2)==i)	// if there is no other shape between the light source and the point P
 		{
 			ray.unitarize();
-			result = result + max(0.0, ray*S.get_normal_vect(P));	//scalar product
+			result = result + max(0.0, ray*S.get_normal_vect(P)*lights[i]->get_brightness());	//scalar product
 		}
 	}
 	

@@ -8,6 +8,8 @@ HEADERS = $(addprefix $(SRCPATH), math_objects.hpp shape.hpp light_source.hpp en
 
 default: main
 
+all: main test_xml test_display
+
 main : $(OBJFILES)
 	g++ $(FLAGS) -o $@ $^
 
@@ -27,4 +29,4 @@ $(OBJPATH)%.o : $(SRCPATH)%.cpp $(HEADERS)
 
 
 clean :
-	rm -rf $(OBJPATH) core main test_* *.png
+	rm -rf $(OBJPATH) $(OBJPATH)*.png *.png core main test_*

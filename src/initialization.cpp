@@ -12,13 +12,13 @@ using namespace tinyxml2;
  */
 Environment initialization()
 {
-	auto S1 = shared_ptr<Shape>(new Sphere(Color(255,0,0), 0, Point(-9,-9,-9), 1));	//red sphere
-	auto S2 = shared_ptr<Shape>(new Sphere(Color(0,255,0), 0, Point(-2,-3,-1), 1));	//green sphere
+	auto S1 = shared_ptr<Shape>(new Sphere(Color(255,0,0), 0, Point(10,10,-2), 0.5));	//red sphere
+	auto S2 = shared_ptr<Shape>(new Sphere(Color(0,255,0), 0, Point(10,10,2), 0.5));	//green sphere
 	
 	Point d(2, 1, 0.5);
-	auto sun = shared_ptr<Light_source>(new Sun(d, 0.5));
+	auto sun = shared_ptr<Light_source>(new Sun(d, 1));
 	
-	Camera cam(Point(1,1,1), Point(4,4,4), 16, 400, 300);
+	Camera cam(Point(0,0,0), Point(4,4,0), 16, 400, 300);
 	
 	Environment world = Environment(cam);
 	world.add_object(S1);
