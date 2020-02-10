@@ -10,9 +10,9 @@
 class Camera
 {
 public:
-	Camera(const Point& O, const Point& M, double w, double h, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(h), widthpx(wpx), heightpx(hpx) {};
-	Camera(const Point& O, const Point& M, double w, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(hpx*w/wpx), widthpx(wpx), heightpx(hpx) {};
-	Camera(): origin(Point(1,1,1)), target(Point(4,4,4)), width(16), height(12) , widthpx(400), heightpx(300) {};
+	Camera(const Point& O, const Point& M, double w, double h, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(h), pxwidth(wpx), pxheight(hpx) {};
+	Camera(const Point& O, const Point& M, double w, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(hpx*w/wpx), pxwidth(wpx), pxheight(hpx) {};
+	Camera(): origin(Point(1,1,1)), target(Point(4,4,4)), width(16), height(12) , pxwidth(400), pxheight(300) {};
 	
 	Point get_origin() const
 	{
@@ -30,13 +30,13 @@ public:
 	{
 		return height;
 	}
-	unsigned get_widthpx() const
+	unsigned get_pxwidth() const
 	{
-		return widthpx;
+		return pxwidth;
 	}
-	unsigned get_heightpx() const
+	unsigned get_pxheight() const
 	{
-		return heightpx;
+		return pxheight;
 	}
 	
 	Ray ray_from_pixel(unsigned x, unsigned y) const;
@@ -44,7 +44,7 @@ public:
 private:
 	Point origin, target;	//origin of the camera, and center of the projection plane
 	double width, height;	//width and height of the rendered image
-	unsigned widthpx, heightpx;	//width and height of the rendered image
+	unsigned pxwidth, pxheight;	//width and height of the rendered image
 };
 
 #endif

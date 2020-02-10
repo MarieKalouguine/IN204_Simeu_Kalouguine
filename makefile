@@ -29,4 +29,4 @@ $(OBJPATH)%.o : $(SRCPATH)%.cpp $(HEADERS)
 
 
 clean :
-	rm -rf $(OBJPATH) $(OBJPATH)*.png *.png core main test_*
+	rm -rf $(OBJPATH) $(SRCPATH)image.png *.png core main test_*

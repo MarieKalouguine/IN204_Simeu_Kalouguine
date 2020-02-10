@@ -5,8 +5,8 @@
 
 Ray Camera::ray_from_pixel(unsigned x, unsigned y) const
 {
-	double lat = ((double)heightpx/2 - y)*height/heightpx;	// Coordinates of the intersection point in the
-	double lon = ((double)x - widthpx/2)*width/widthpx;		//	coordinate system of the camera
+	double lat = ((double)pxheight/2 - y)*height/pxheight;	// Coordinates of the intersection point in the
+	double lon = ((double)x - pxwidth/2)*width/pxwidth;		//	coordinate system of the camera
 	
 	Point p = target - origin;
 	p.unitarize();	//unitary vector normal to the camera image
