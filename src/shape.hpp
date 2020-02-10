@@ -10,8 +10,8 @@
 class Shape
 {
 public:
-	Shape(Color col, float alb): color(col), albedo(alb) {};
-	Color get_color() const
+	Shape(Color<unsigned char> col, float alb): color(col), albedo(alb) {};
+	Color<unsigned char> get_color() const
 	{
 		return color;
 	}
@@ -22,7 +22,7 @@ public:
 	virtual bool is_crossed (const Ray&, Point&) const = 0;
 	virtual Ray get_normal_vect(const Point&) const = 0;
 private:
-	Color color;
+	Color<unsigned char> color;
 	float albedo;
 };
 
@@ -32,7 +32,7 @@ private:
 class Sphere : public Shape
 {
 public:
-	Sphere(Color col, float reflex, const Point& O , double r): Shape(col, reflex), center(O), size(r){};
+	Sphere(Color<unsigned char> col, float reflex, const Point& O , double r): Shape(col, reflex), center(O), size(r){};
 	Point get_center() const
 	{
 		return center;

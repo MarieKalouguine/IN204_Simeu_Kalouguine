@@ -7,6 +7,7 @@
 #include "shape.hpp"
 #include "light_source.hpp"
 #include "camera.hpp"
+#include "color.hpp"
 
 using namespace std;
 
@@ -32,19 +33,22 @@ class Environment
 		}
 		
 		int find_first_intersect(const Ray&, Point&) const;
-		float lighting(const Point&, const Shape&) const;
+		float lighting(const Point&, unsigned) const;
 		
 		Ray ray_from_pixel(unsigned x, unsigned y) const
 		{
 			return camera.ray_from_pixel(x, y);
 		}
 		
-		Color color_from_pixel(unsigned x, unsigned y) const;
+		Color<float> color_from_ray(Ray r) const;
+		void raytracing() const;
 		
 	private:
 		std::vector<shared_ptr<Shape>> scene_objects;
 		std::vector<shared_ptr<Light_source>> lights;
 		Camera camera;
 };
+
+void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color<float>> &img);
 
 #endif

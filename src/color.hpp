@@ -4,21 +4,22 @@
 /**
  * Color is stored as a tuple of doubles (red, green, blue)
  */
+template <typename T>
 class Color
 {
 public:
-	Color(const float& R, const float& G, const float& B) : r(R), g(G), b(B) {}
+	Color(const T& R, const T& G, const T& B) : r(R), g(G), b(B) {}
 	Color() : r(0), g(0), b(0) {}
 	
-	float get_r() const
+	T get_r() const
 	{
 		return r;
 	}
-	float get_g() const
+	T get_g() const
 	{
 		return g;
 	}
-	float get_b() const
+	T get_b() const
 	{
 		return b;
 	}
@@ -28,7 +29,12 @@ public:
 	}
 	
 private:
-	float r, g, b;
+	T r, g, b;
 };
+
+inline Color<float> convert_to_float(const Color<unsigned char>& c)
+{
+	return Color<float>( c.get_r(), c.get_g(), c.get_b() );
+}
 
 #endif
