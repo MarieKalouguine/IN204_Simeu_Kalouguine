@@ -12,7 +12,7 @@ class Camera
 public:
 	Camera(const Point& O, const Point& M, double w, double h, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(h), widthpx(wpx), heightpx(hpx) {};
 	Camera(const Point& O, const Point& M, double w, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(hpx*w/wpx), widthpx(wpx), heightpx(hpx) {};
-	Camera(): origin(Point(1,1,1)), target(Point(2,2,2)), width(1), height(0.75) , widthpx(400), heightpx(300) {};
+	Camera(): origin(Point(1,1,1)), target(Point(4,4,4)), width(16), height(12) , widthpx(400), heightpx(300) {};
 	
 	Point get_origin() const
 	{

@@ -6,7 +6,7 @@
 Ray Camera::ray_from_pixel(unsigned x, unsigned y) const
 {
 	double lat = ((double)y - heightpx/2)*height/heightpx;
-	double lon = ((double)x - widthpx/2)*width/widthpx;
+	double lon = (widthpx/2 - (double)x)*width/widthpx;
 	Point P = target - origin;
 	
 	double P_x=P.get_x(), P_y=P.get_y();

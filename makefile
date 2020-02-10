@@ -14,6 +14,9 @@ main : $(OBJFILES)
 test_xml : $(OBJPATH)tinyxml2.o $(OBJPATH)test_xml.o
 	g++ $(FLAGS) -o $@ $^
 
+test_display : $(TESTPATH)test_display.cpp
+	g++ $(FLAGS) -o $@ $^
+
 $(OBJPATH)test_%.o : $(TESTPATH)test_%.cpp $(HEADERS)
 	@mkdir -p $(OBJPATH)
 	(cd $(OBJPATH); g++ $(FLAGS) -c ../$<)
@@ -24,4 +27,4 @@ $(OBJPATH)%.o : $(SRCPATH)%.cpp $(HEADERS)
 
 
 clean :
-	rm -rf $(OBJPATH) core main test_xml
+	rm -rf $(OBJPATH) core main test_* *.png

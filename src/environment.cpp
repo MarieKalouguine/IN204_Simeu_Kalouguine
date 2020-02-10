@@ -73,18 +73,15 @@ void Environment::raytracing() const
 	unsigned w = camera.get_widthpx();
 	unsigned h = camera.get_heightpx();
 	
-	std::ofstream ofs("image.txt", std::ios::out | std::ios::binary); 
-	for (unsigned i = 0; i < w; ++i)
+	for (unsigned j = 0; j < h; ++j)
 	{
-		for (unsigned j = 0; j < h; ++j)
+		for (unsigned i = 0; i < w; ++i)
 		{
 			Color c = color_from_ray(ray_from_pixel(i, j));
 			img.push_back(c);
-			ofs << std::to_string(c.get_r()) <<" "<< std::to_string(c.get_g()) <<" "<< std::to_string(c.get_b())<<"\n";
 		}
 	}
 	save_image("image.png", camera.get_widthpx(), camera.get_heightpx(), img);
-	ofs.close();
 }
 
 void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color> &img)
@@ -96,7 +93,6 @@ void save_image(const std::string &filename, unsigned width, unsigned height, co
 	for (unsigned i = 0; i < width * height; ++i)
 	{
 		ofs << img[i].get_r() << img[i].get_g() << img[i].get_b();
-		//printf("%d, %d, %d\n", img[i].get_r(), img[i].get_g(), img[i].get_b());
 	}
 	ofs.close();
 }
