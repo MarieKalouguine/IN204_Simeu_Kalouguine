@@ -13,9 +13,9 @@ int Environment::find_first_intersect(const Ray& ray, Point& P_min) const
 	double min_dist, dist;
 	Point P;
 	int i;
-	for(i = 0; i < (int)scene_objects.size(); i++)
+	for(i = 0; i < (int)shapes.size(); i++)
 	{
-		if (scene_objects[i]->is_crossed(ray, P))
+		if (shapes[i]->is_crossed(ray, P))
 		{
 			dist = ray.get_origin().square_distance_to(P);
 			if (index==-1||(dist<min_dist))
@@ -36,7 +36,7 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 {
 	double result = 0;
 	int i;
-	const Shape& S = *scene_objects[index_shape];
+	const Shape& S = *shapes[index_shape];
 	for(i = 0; i < (int)lights.size(); i++)
 	{
 		Ray ray = lights[i]->ray_from_point(P);
@@ -58,7 +58,7 @@ Color<float> Environment::color_from_ray(Ray r) const
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
 	{
-		return convert_to_float(scene_objects[index]->get_color()) * lighting(I, index);
+		return convert_to_float(shapes[index]->get_color()) * lighting(I, index);
 	}
 	return Color<float>();
 }
@@ -66,18 +66,19 @@ Color<float> Environment::color_from_ray(Ray r) const
 void Environment::raytracing() const
 {
 	std::vector<Color<float>> img;
-	unsigned w = camera.get_widthpx();
-	unsigned h = camera.get_heightpx();
+	unsigned w = camera.get_pxwidth();
+	unsigned h = camera.get_pxheight();
 	
 	for (unsigned j = 0; j < h; ++j)
 	{
 		for (unsigned i = 0; i < w; ++i)
 		{
+			// i is horizontal, j is vertical
 			Color<float> c = color_from_ray(ray_from_pixel(i, j));
 			img.push_back(c);
 		}
 	}
-	save_image("image.png", camera.get_widthpx(), camera.get_heightpx(), img);
+	save_image("image.png", camera.get_pxwidth(), camera.get_pxheight(), img);
 }
 
 void save_image(const std::string &filename, unsigned width, unsigned height, const std::vector<Color<float>> &img)

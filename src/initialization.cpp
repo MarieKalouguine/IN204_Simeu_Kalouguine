@@ -19,15 +19,14 @@ Environment initialization()
 	auto sun = shared_ptr<Light_source>(new Sun(d, 1));
 	
 	Point o(12, 8, 5);
-	auto lamp = shared_ptr<Light_source>(new Lamp(o, 1));
+	auto lamp = shared_ptr<Light_source>(new Lamp(o, 0.5));
 	
-	Camera cam(Point(0,0,0), Point(4,4,0), 6, 400, 300);
+	Camera cam(Point(0,0,0), Point(4,4,0), 6, 800, 600);
 	
 	Environment world = Environment(cam);
-	world.add_object(S1);
-	world.add_object(S2);
-	//world.add_light(lamp);
-	world.add_light(sun);
+	world.add_shape(S1);
+	world.add_shape(S2);
+	world.add_light(lamp);
 	world.add_light(sun);
 	
 	return world;
