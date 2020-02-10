@@ -10,7 +10,7 @@ Ray Camera::ray_from_pixel(unsigned x, unsigned y) const
 	
 	Point p = target - origin;
 	p.unitarize();	//unitary vector normal to the camera image
-	Point n1 = Point(-p.get_y(), p.get_x(), 0);
+	Point n1 = Point(p.get_y(), -p.get_x(), 0);
 	n1.unitarize();	// unitary vector normal to p (which means in the plane of the camera image), and parallel to the plane (x, y)
 	Point n2 = n1^p;	// unitary vector normal to p and n1
 	Point result = target + n1*lon + n2*lat;

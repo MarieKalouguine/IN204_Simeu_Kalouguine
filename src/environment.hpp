@@ -33,7 +33,7 @@ class Environment
 		}
 		
 		int find_first_intersect(const Ray&, Point&) const;
-		float lighting(const Point&, const Shape&) const;
+		float lighting(const Point&, unsigned) const;
 		
 		Ray ray_from_pixel(unsigned x, unsigned y) const
 		{
