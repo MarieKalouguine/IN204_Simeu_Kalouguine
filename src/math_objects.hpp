@@ -28,8 +28,8 @@ public:
 		return z;
 	}
 	
-	double square_distance_to(const Point&) const;
-	void print() const {
+	
+	void print() const{
 		std::cout << "(" << x << ", " << y << ", " << z << ")\n";
 	}
 	Point operator+(const Point& P) const {
@@ -44,10 +44,34 @@ public:
 	Point operator/(double k) const {
 		return Point(x/k, y/k, z/k);
 	}
-	double operator*(Point A) const {	//scalar product
+	double operator*(Point A) const {	//scalar product (a point can be considered as a vector)
 		return x*A.x + y*A.y + z*A.z;
 	}
-	Point translate_by(const Ray&) const;	//creates a new point, translated from the initial point by a given vector/ray
+	Point operator^(Point A) const {	//cross product (same)
+		return Point( y*A.z - z*A.y,  z*A.x - x*A.z, x*A.y - y*A.x);
+	}
+	
+	double abs() const
+	{
+		return x*x + y*y + z*z;
+	}
+	
+	void unitarize()
+	{
+		double length = sqrt(abs());
+		x = x/length;
+		y = y/length;
+		z = z/length;
+	}
+	
+	double square_distance_to(const Point& P) const
+	{
+		return (P-*this).abs();
+	}
+	
+	Point translate_by(const Ray& r) const;	//creates a new point, translated from the initial point by a given vector/ray
+
+	
 private:
 	double x, y, z;
 };
@@ -85,22 +109,29 @@ public:
 	{
 		return (dir-origin)*(r.dir-r.origin);
 	}
+	Point operator^(Ray r) const	//cross product
+	{
+		return (dir-origin)^(r.dir-r.origin);
+	}
+	
 	Ray operator*(double k) const
 	{
 		return Ray(origin, origin+(dir-origin)*k);
 	}
+	
 	Ray operator/(double k) const
 	{
 		return Ray(origin, origin+(dir-origin)/k);
 	}
-	double length() {
-		return origin.square_distance_to(dir);
+	
+	double length()
+	{
+		return (dir - origin).abs();
 	}
 	
 	void unitarize()
 	{
-		double length = sqrt(origin.square_distance_to(dir));
-		dir = origin+(dir-origin)/length;
+		dir = origin+(dir-origin)/sqrt(length());
 	}
 	Ray unitarized() const
 	{
