@@ -10,9 +10,12 @@
     </target>
   </camera>
   <lights>
-    <sun brightness="1.0">
+    <sun brightness="1.034">
       <point x="8.45" y="1.11" z="2.54"/>
     </sun>
+	<sun brightness="0.789">
+		<point x="8.45" y="1.11" z="2.54"/>
+	</sun>
     <lamp brightness="1.0">
       <point x="6.56" y="-1.11" z="-2.54"/>
     </lamp>

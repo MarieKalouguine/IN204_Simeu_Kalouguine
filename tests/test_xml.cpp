@@ -1,20 +1,28 @@
 #include <iostream>
-#include "../src/tinyxml2.h"
+#include "../src/tinyxml2.hpp"
 
 using namespace std;
 using namespace tinyxml2;
 
 int main()
 {
-    XMLDocument doc;
-    XMLError eResult;
+	XMLDocument doc;
+	XMLError eResult;
 	doc.LoadFile( "scene.xml" );
 	XMLNode *world = doc.FirstChildElement("world");
-	XMLElement *camera = world->FirstChildElement("camera");
-	int pxwidth;
-	eResult = camera->QueryIntAttribute("pxwidth", &pxwidth);
-
 	XMLElement *lights = world->FirstChildElement("lights");
-	cout<<lights<<endl;
-    return 0;
+	
+	XMLElement *sun = lights->FirstChildElement("sun");
+	double brightness;
+	eResult = sun->QueryDoubleAttribute("brightness", &brightness);
+	cout<<brightness<<endl;
+	sun = sun->NextSiblingElement("sun");
+	while (sun)
+	{
+		eResult = sun->QueryDoubleAttribute("brightness", &brightness);
+		cout<<brightness<<endl;
+		sun = sun->NextSiblingElement("sun");
+	}
+	
+	return 0;
 }
