@@ -76,7 +76,8 @@ Color<float> Environment::recursive_color_from_ray(Ray r, float coeff, unsigned 
 		
 		Ray n = shapes[index]->get_normal_vect(I);
 		Ray newRay = r.reflect(n);
-		Color<float> reflexion = recursive_color_from_ray(-newRay, albedo*coeff, counter+1);
+		Color<float> reflexion = recursive_color_from_ray(newRay, albedo*coeff, counter+1);
+		(reflexion-color).print();
 		return (reflexion*albedo) + (color*(1-albedo));
 	}
 	return Color<float>();

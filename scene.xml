@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <world>
-	<camera pxwidth="800" pxheight="800" width="4">
+	<camera pxwidth="100" pxheight="100" width="2">
 		<origin x="0" y="0" z="0"/>
 		<target x="4" y="4" z="0"/>
 	</camera>
@@ -9,22 +9,17 @@
 		<sun brightness="2">
 			<point x="3" y="2" z="-1"/>
 		</sun>
-		<lamp brightness="1.0">
-			<point x="12" y="8" z="5"/>
-		</lamp>
 	</lights>
 	<shapes>
-		<sphere color="green" albedo="0" size="1.5">
-			<point x="9" y="11" z="-2"/>
-		</sphere>
+		
 		<sphere color="blue" albedo="0.5" size="1">
 			<point x="10" y="10" z="1"/>
 		</sphere>
 		<sphere color="red" albedo="0" size="0.3">
-			<point x="9.5" y="9.5" z="0.5"/>
+			<point x="9" y="8.5" z="0.5"/>
 		</sphere>
 		<sphere color="white" albedo="0" size="0.3">
-			<point x="10.5" y="8.5" z="0.5"/>
+			<point x="8" y="9" z="0"/>
 		</sphere>
 	</shapes>
 </world>
