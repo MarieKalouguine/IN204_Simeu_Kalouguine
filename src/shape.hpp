@@ -5,25 +5,25 @@
 #include "color.hpp"
 
 /**
- * Abstract class shape, containing color and albedo (= reflexivity)
+ * Abstract class shape, containing color and gloss (= reflexivity)
  */
 class Shape
 {
 public:
-	Shape(Color<unsigned char> col, float alb): color(col), albedo(alb) {};
+	Shape(Color<unsigned char> col, float alb): color(col), gloss(alb) {};
 	Color<unsigned char> get_color() const
 	{
 		return color;
 	}
-	float get_albedo() const
+	float get_gloss() const
 	{
-		return albedo;
+		return gloss;
 	}
 	virtual bool is_crossed (const Ray&, Point&) const = 0;
 	virtual Ray get_normal_vect(const Point&) const = 0;
 private:
 	Color<unsigned char> color;
-	float albedo;
+	float gloss;
 };
 
 /**

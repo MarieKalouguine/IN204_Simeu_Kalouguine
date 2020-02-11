@@ -17,13 +17,13 @@
 		</lamp>
 	</lights>
 	<shapes>
-		<sphere color="green" albedo="0.5" size="1.5">
+		<sphere color="green" gloss="0.5" size="1.5">
 			<point x="9" y="11" z="-2"/>
 		</sphere>
-		<sphere color="blue" albedo="0.5" size="1">
+		<sphere color="blue" gloss="0.5" size="1">
 			<point x="10" y="10" z="1"/>
 		</sphere>
-		<sphere color="red" albedo="0.1" size="0.3">
+		<sphere color="red" gloss="0.1" size="0.3">
 			<point x="9" y="8" z="0.5"/>
 		</sphere>
 	</shapes>
