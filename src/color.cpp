@@ -15,5 +15,9 @@ Color<unsigned char> color_from_string(const char* s)
 		return Color<unsigned char>(0,255,0);
 	if (!strcmp(s,"blue"))
 		return Color<unsigned char>(0,0,255);
+	if (!strcmp(s,"white"))
+		return Color<unsigned char>(255,255,255);
+	if (!strcmp(s,"blue"))
+		return Color<unsigned char>(0,0,0);
 	return Color<unsigned char>();
 }
