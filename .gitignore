@@ -1,0 +1,6 @@
+obj
+src/*.ppm
+*.ppm
+core
+main
+test_*
