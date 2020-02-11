@@ -8,6 +8,6 @@
 
 int main()
 {	
-	Environment world = initialization();
+	Environment world = initialization("scene.xml");
 	world.raytracing();
 }

@@ -10,8 +10,8 @@
 class Camera
 {
 public:
-	Camera(const Point& O, const Point& M, double w, double h, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(h), pxwidth(wpx), pxheight(hpx) {};
-	Camera(const Point& O, const Point& M, double w, unsigned wpx, unsigned hpx): origin(O), target(M), width(w), height(hpx*w/wpx), pxwidth(wpx), pxheight(hpx) {};
+	Camera(const Point& O, const Point& T, double w, double h, unsigned wpx, unsigned hpx): origin(O), target(T), width(w), height(h), pxwidth(wpx), pxheight(hpx) {};
+	Camera(const Point& O, const Point& T, double w, unsigned wpx, unsigned hpx): origin(O), target(T), width(w), height(hpx*w/wpx), pxwidth(wpx), pxheight(hpx) {};
 	Camera(): origin(Point(1,1,1)), target(Point(4,4,4)), width(16), height(12) , pxwidth(400), pxheight(300) {};
 	
 	Point get_origin() const

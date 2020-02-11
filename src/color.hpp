@@ -32,9 +32,8 @@ private:
 	T r, g, b;
 };
 
-inline Color<float> convert_to_float(const Color<unsigned char>& c)
-{
-	return Color<float>( c.get_r(), c.get_g(), c.get_b() );
-}
+Color<float> convert_to_float(const Color<unsigned char>& c);
+
+Color<unsigned char> color_from_string(const char*s);
 
 #endif

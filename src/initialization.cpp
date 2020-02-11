@@ -1,34 +1,111 @@
-#include "math_objects.hpp"
-#include "shape.hpp"
-#include "light_source.hpp"
-#include "environment.hpp"
-#include "tinyxml2.h"
+#include <iostream>
+
+#include "initialization.hpp"
 
 using namespace tinyxml2;
 
 /**
- * Currently initializes an environment with some objects.
- * TODO: Initialize from an XML document (inspiration from test_xml.cpp)
+ * Initializes an environment by parsing an XML document
  */
-Environment initialization()
+Environment initialization(const std::string &filename)
 {
-	auto S1 = shared_ptr<Shape>(new Sphere(Color<unsigned char>(255,0,0), 0, Point(9,11,-2), 1.5));	//red sphere
-	auto S2 = shared_ptr<Shape>(new Sphere(Color<unsigned char>(0,255,0), 0, Point(10,10,2), 1.5));	//green sphere
+	XMLDocument doc;
+	doc.LoadFile(filename.c_str());
+	XMLNode *e = doc.FirstChildElement("world");
 	
-	Point d(0, -1, -5);
-	auto sun = shared_ptr<Light_source>(new Sun(d, 1));
+	//find camera
+	XMLElement *camera = e->FirstChildElement("camera");
+	Camera cam = initialize_camera(*camera);
+	Environment world = Environment(cam);	//initialize empty environment
 	
-	Point o(12, 8, 5);
-	auto lamp = shared_ptr<Light_source>(new Lamp(o, 0.5));
+	//find lights
+	XMLElement *lights = e->FirstChildElement("lights");
+	//find suns
+	XMLElement *sun = lights->FirstChildElement("sun");
+	while (sun)
+	{
+		world.add_light(initialize_sun(*sun));
+		sun = sun->NextSiblingElement("sun");
+	}
+	//find lamps
+	XMLElement *lamp = lights->FirstChildElement("lamp");
+	while (lamp)
+	{
+		world.add_light(initialize_lamp(*lamp));
+		lamp = lamp->NextSiblingElement("lamp");
+	}
 	
-	Camera cam(Point(0,0,0), Point(4,4,0), 6, 800, 600);
-	
-	Environment world = Environment(cam);
-	world.add_shape(S1);
-	world.add_shape(S2);
-	world.add_light(lamp);
-	world.add_light(sun);
+	//find shapes
+	XMLElement *shapes = e->FirstChildElement("shapes");
+	//find spheres
+	XMLElement *sphere = shapes->FirstChildElement("sphere");
+	while (sphere)
+	{
+		world.add_shape(initialize_sphere(*sphere));
+		sphere = sphere->NextSiblingElement("sphere");
+	}
 	
 	return world;
 }
 
+Point initialize_point(XMLElement &point)
+{
+	double x, y, z;
+	point.QueryDoubleAttribute("x", &x);
+	point.QueryDoubleAttribute("y", &y);
+	point.QueryDoubleAttribute("z", &z);
+	
+	return Point(x, y, z);
+}
+
+Camera initialize_camera(XMLElement &camera)
+{
+	//read origin
+	XMLElement *origin = camera.FirstChildElement("origin");
+	Point O = initialize_point(*origin);
+	//read target
+	XMLElement *target = camera.FirstChildElement("target");
+	Point T = initialize_point(*target);
+	
+	unsigned pxwidth, pxheight;
+	camera.QueryUnsignedAttribute("pxwidth", &pxwidth);
+	camera.QueryUnsignedAttribute("pxheight", &pxheight);
+	double width;
+	camera.QueryDoubleAttribute("width", &width);
+	
+	return Camera(O, T, width, pxwidth, pxheight);
+}
+
+
+shared_ptr<Light_source> initialize_lamp(XMLElement &lamp)
+{
+	double b;
+	lamp.QueryDoubleAttribute("brightness", &b);
+	XMLElement *point = lamp.FirstChildElement("point");
+	Point O = initialize_point(*point);
+	return shared_ptr<Light_source>(new Lamp(O, b));
+}
+
+shared_ptr<Light_source> initialize_sun(XMLElement &sun)
+{
+	double b;
+	sun.QueryDoubleAttribute("brightness", &b);
+	XMLElement *point = sun.FirstChildElement("point");
+	Point O = initialize_point(*point);
+	return shared_ptr<Light_source>(new Sun(O, b));
+}
+
+shared_ptr<Shape> initialize_sphere(XMLElement &sphere)
+{
+	char* color;
+	sphere.QueryStringAttribute("color", (const char**)&color);
+	Color<unsigned char> col = color_from_string(color);
+	float albedo;
+	sphere.QueryFloatAttribute("albedo", &albedo);
+	double size;
+	sphere.QueryDoubleAttribute("size", &size);
+	XMLElement *point = sphere.FirstChildElement("point");
+	Point O = initialize_point(*point);
+	
+	return shared_ptr<Shape>(new Sphere(col, albedo, O , size));
+}

@@ -12,11 +12,8 @@ int main()
 	XMLNode *world = doc.FirstChildElement("world");
 	XMLElement *lights = world->FirstChildElement("lights");
 	
-	XMLElement *sun = lights->FirstChildElement("sun");
 	double brightness;
-	eResult = sun->QueryDoubleAttribute("brightness", &brightness);
-	cout<<brightness<<endl;
-	sun = sun->NextSiblingElement("sun");
+	XMLElement *sun = lights->FirstChildElement("sun");
 	while (sun)
 	{
 		eResult = sun->QueryDoubleAttribute("brightness", &brightness);
