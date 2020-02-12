@@ -32,6 +32,9 @@ public:
 	void print() const{
 		std::cout << "(" << x << ", " << y << ", " << z << ")\n";
 	}
+	bool operator==(const Point& P) const {
+		return (x==P.x)&&(y==P.y)&&(z==P.z);
+	}
 	Point operator-() const {
 		return Point(-x, -y, -z);
 	}

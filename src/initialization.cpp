@@ -109,12 +109,14 @@ shared_ptr<Shape> initialize_sphere(XMLElement &sphere)
 	Color<unsigned char> col = color_from_string(color);
 	float gloss;
 	sphere.QueryFloatAttribute("gloss", &gloss);
+	bool chessed;
+	sphere.QueryBoolAttribute("chessed", &chessed);
 	double size;
 	sphere.QueryDoubleAttribute("size", &size);
 	XMLElement *point = sphere.FirstChildElement("point");
 	Point O = initialize_point(*point);
 	
-	return shared_ptr<Shape>(new Sphere(col, gloss, O , size));
+	return shared_ptr<Shape>(new Sphere(col, gloss, chessed, O , size));
 }
 
 shared_ptr<Shape> initialize_plane(XMLElement &plane)
@@ -124,11 +126,13 @@ shared_ptr<Shape> initialize_plane(XMLElement &plane)
 	Color<unsigned char> col = color_from_string(color);
 	float gloss;
 	plane.QueryFloatAttribute("gloss", &gloss);
+	bool chessed;
+	plane.QueryBoolAttribute("chessed", &chessed);
 	XMLElement *point = plane.FirstChildElement("origin");
 	Point O = initialize_point(*point);
 	point = plane.FirstChildElement("normal");
 	Point n = initialize_point(*point);
 	n.unitarize();
 	
-	return shared_ptr<Shape>(new Plane(col, gloss, O, n));
+	return shared_ptr<Shape>(new Plane(col, gloss, chessed, O, n));
 }

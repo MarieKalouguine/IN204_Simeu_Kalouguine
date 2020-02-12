@@ -10,19 +10,18 @@
 class Shape
 {
 public:
-	Shape(Color<unsigned char> col, float glos): color(col), gloss(glos) {};
-	Color<unsigned char> get_color() const
-	{
-		return color;
-	}
+	Shape(Color<unsigned char> col, float glos, bool chess): color(col), chessed(chess), gloss(glos) {};
 	float get_gloss() const
 	{
 		return gloss;
 	}
+	virtual Color<unsigned char> get_color(const Point& I) const=0;
 	virtual bool is_crossed (const Ray&, Point&) const = 0;
 	virtual Ray get_normal_vect(const Point&) const = 0;
-private:
+protected:
 	Color<unsigned char> color;
+	bool chessed;	//true if the shape has a white chess pattern on it
+private:
 	float gloss;
 };
 
@@ -32,7 +31,7 @@ private:
 class Sphere : public Shape
 {
 public:
-	Sphere(Color<unsigned char> col, float gloss, const Point& O , double r): Shape(col, gloss), center(O), size(r){};
+	Sphere(Color<unsigned char> col, float gloss, bool chess, const Point& O , double r): Shape(col, gloss, chess), center(O), size(r){};
 	Point get_center() const
 	{
 		return center;
@@ -41,6 +40,7 @@ public:
 	{
 		return size;
 	}
+	Color<unsigned char> get_color(const Point& I) const;
 	bool is_crossed (const Ray&, Point&) const;
 	Ray get_normal_vect(const Point&) const;
 private:
@@ -54,7 +54,7 @@ private:
 class Plane : public Shape
 {
 public:
-	Plane(Color<unsigned char> col, float gloss, const Point& O , const Point& n): Shape(col, gloss), origin(O), normal(n) {};
+	Plane(Color<unsigned char> col, float gloss, bool chess, const Point& O , const Point& n): Shape(col, gloss, chess), origin(O), normal(n) {};
 	Point get_origin() const
 	{
 		return origin;
@@ -63,11 +63,12 @@ public:
 	{
 		return normal;
 	}
+	Color<unsigned char> get_color(const Point& I) const;
 	bool is_crossed (const Ray&, Point&) const;
 	Ray get_normal_vect(const Point&) const;
 private:
 	Point origin;	//any point on the plane
-	Point normal;
+	Point normal;	//is unitary
 };
 
 #endif

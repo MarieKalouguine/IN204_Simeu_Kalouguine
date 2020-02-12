@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "shape.hpp"
 
 /**
@@ -51,4 +53,62 @@ Ray Plane::get_normal_vect(const Point& P) const
 	Ray vect1(P, P+normal);
 	vect1.unitarize();	//just to be sure
 	return vect1;
+}
+
+
+
+/**
+ * Returns the color of a point on the shape
+ */
+Color<unsigned char> Sphere::get_color(const Point& I) const
+{
+	if (!chessed)	
+		return color;
+	else
+	{
+		Point P = I-center;
+		P.unitarize();
+		double v_sinus = P*Point(0,0,1);
+		int lat = (int) (abs(asin(v_sinus))*2);
+		if (v_sinus<0)
+			lat = lat+1;
+		Point v = (P - Point(0,0,1)*v_sinus);
+		v.unitarize();
+		int lon = (int) (acos(v*Point(1,0,0))*2);
+		if ((lon+lat)%2==1)
+		{
+			return color_from_string("white");
+		}
+		return color;
+	}
+}
+
+Color<unsigned char> Plane::get_color(const Point& I) const
+{
+	if (!chessed)	
+		return color;
+	else
+	{
+		Point v1;
+		if (normal==Point(1,0,0))
+			v1 = normal^Point(0,1,0);
+		else
+			v1 = normal^Point(1,0,0);
+		v1.unitarize();
+		Point v2 = normal^v1;
+		//v1 and v2 are two orthogonal unitary vectors of the plane
+		double i = v1*(I-origin);
+		double j = v2*(I-origin);
+		int lon = (int) abs(i);
+		int lat = (int) abs(j);
+		if (i<0)
+			lon = lon+1;
+		if (j<0)
+			lat = lat+1;
+		if ((lon+lat)%2==1)
+		{
+			return color_from_string("white");
+		}
+		return color;
+	}
 }

@@ -37,15 +37,19 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 	double result = 0;
 	int i;
 	const Shape& S = *shapes[index_shape];
+	Ray n = S.get_normal_vect(P);
 	for(i = 0; i < (int)lights.size(); i++)
 	{
 		Ray ray = lights[i]->ray_from_point(P);
-		Point P2;
-		int j = find_first_intersect(ray, P2);
-		if (j==-1 || j==(int)index_shape)	// if there is no other shape between the light source and the point P
+		if (ray*n>=0)	// if the light source is not inside the shape
 		{
-			ray.unitarize();
-			result = result + max(0.0, ray*S.get_normal_vect(P)*lights[i]->get_brightness());	//scalar product
+			Point P2;
+			int j = find_first_intersect(ray, P2);
+			if (j==-1 || j==(int)index_shape)	// if there is no other shape between the light source and the point P
+			{
+				ray.unitarize();
+				result = result + (ray*S.get_normal_vect(P)) * (lights[i]->get_brightness());	//scalar product
+			}
 		}
 	}
 	
@@ -58,7 +62,7 @@ Color<float> Environment::color_from_ray(Ray r) const
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
 	{
-		return convert_to_float(shapes[index]->get_color()) * lighting(I, index);
+		return convert_to_float(shapes[index]->get_color(I)) * lighting(I, index);
 	}
 	return Color<float>();
 }

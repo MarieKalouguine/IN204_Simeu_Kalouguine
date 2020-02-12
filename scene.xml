@@ -1,34 +1,33 @@
 <?xml version="1.0"?>
 
 <world>
-	<camera pxwidth="500" pxheight="500" width="4">
-		<origin x="0" y="0" z="3"/>
+	<camera pxwidth="500" pxheight="500" width="6">
+		<origin x="1" y="0" z="3"/>
 		<target x="4" y="4" z="2"/>
 	</camera>
 	<lights>
-		<sun brightness="1.034">
-			<point x="4" y="2" z="-10"/>
-		</sun>
-		<lamp brightness="1">
-			<point x="10" y="0" z="10"/>
-		</lamp>
-		<lamp brightness="1">
-			<point x="15" y="0" z="10"/>
-		</lamp>
-		<lamp brightness="1">
-			<point x="20" y="0" z="10"/>
+		<lamp brightness="2">
+			<point x="5" y="5" z="4"/>
 		</lamp>
 	</lights>
 	<shapes>
-		<sphere color="green" gloss="0.5" size="1.5">
+		<sphere color="green" gloss="0.5" size="1.5" chessed="true">
 			<point x="9" y="11" z="1.5"/>
 		</sphere>
-		<sphere color="red" gloss="0.1" size="0.3">
+		<sphere color="red" gloss="0.1" size="0.3" chessed="false">
 			<point x="9" y="8" z="0.3"/>
 		</sphere>
-		<plane color="white" gloss="0.1">
+		<plane color="blue" gloss="0.1" chessed="true">
 			<origin x="0" y="0" z="0"/>
-			<normal x="0" y="0" z="0.5"/>
+			<normal x="0" y="0" z="1"/>
+		</plane>
+		<plane color="white" gloss="0.1" chessed="false">
+			<origin x="20" y="20" z="0"/>
+			<normal x="-3" y="-1" z="0"/>
+		</plane>
+		<plane color="green" gloss="0.1" chessed="false">
+			<origin x="20" y="20" z="0"/>
+			<normal x="1" y="-3" z="0"/>
 		</plane>
 	</shapes>
 </world>
