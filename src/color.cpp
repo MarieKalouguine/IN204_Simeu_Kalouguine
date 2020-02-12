@@ -21,5 +21,17 @@ Color<unsigned char> color_from_string(const char* s)
 		return Color<unsigned char>(0,0,0);
 	if (!strcmp(s,"grey"))
 		return Color<unsigned char>(150,150,150);
+	if (!strcmp(s,"yellow"))
+		return Color<unsigned char>(252, 231, 0);
+	if (!strcmp(s,"cyan"))
+		return Color<unsigned char>(0, 252, 240);
+	if (!strcmp(s,"orange"))
+		return Color<unsigned char>(252, 140, 0);
+	if (!strcmp(s,"purple"))
+		return Color<unsigned char>(181, 0, 252);
+	if (!strcmp(s,"pink"))
+		return Color<unsigned char>(255, 125, 225);
+	if (!strcmp(s,"brown"))
+		return Color<unsigned char>(138, 72, 41);
 	return Color<unsigned char>();
 }

@@ -1,6 +1,7 @@
 obj
 src/*.ppm
 *.ppm
+*.png
 core
 main
 test_*

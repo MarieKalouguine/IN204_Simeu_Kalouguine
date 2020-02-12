@@ -1,5 +1,11 @@
-# IN204_Privat-Simeu_Kalouguine
+#Projet IN204 - Lancer de rayons
+######Par Marie Kalouguine et Davy Privat-Simeu
+![Image description](./images/image2.png)
 
-Notre projet IN204 porte sur la représentation d'objets tridimensionnels par rayons.
+##Description du projet
 
-Tutoriel : http://www.f-legrand.fr/scidoc/docimg/graphie/rayons/introrayons/introrayons.html
+##Utilisation du code
+
+##Structure du projet
+
+##Améliorations possibles
