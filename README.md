@@ -21,6 +21,7 @@ convertit vers les objets définis dans la bibliothèque. Ce langage peut-être 
 encore être un langage ad hoc que vous définissez de manière totalement libre.
 
 ##Utilisation du code pour synthétiser des images
+####Consignes utilisateur
 
 Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé. La compilation nécessite la version C++11 du compilateur.
 
@@ -30,12 +31,13 @@ Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier
 Pour tester le programme, modifiez le fichier XML à vos besoins, puis lancez la commande `./raytracing`
 
 ####Description de scènes avec XML
-
-La description d'une scène se fait à l'aide de balises dans le fichier `scene.xml`, dans un langagé basé sur XML. La scène s'apparente ainsi à une structure d'arbre.
+La description d'une scène se fait à l'aide de balises dans le fichier `scene.xml`, dans un langagé basé sur XML. La scène s'apparente ainsi à une structure d'arbre. La lecture du fichier se fait grâce à la bibliothèque tinyXML2, donc le code source a été inclus dans le dossier src.
 
 À la racine de l'arbre se trouve la balise <world\>, dans laquelle on place les différents objets composant la scène. Parmi eux, il y a la balise caméra <camera\>, l'ensemble des éclairages <lights\>, ainsi que l'ensemble des objets à représenter <shapes\>.
 
-Une caméra <camera\> est définie par le point duquel on regarde (origin), ainsi qu'un autre point indiquant la direction. Ce deuxième point est dans le plan de projection de la caméra, et l'angle de vue est déterminé par la taille de l'image finale en pixels (pxwidth et pxheight) ainsi que la largeur "réelle" du plan de projection (width). Sa hauteur n'est pas renseignée mais calculée automatiquement, afin d'éviter d'étirer l'image par inadvertence. 
+Une caméra <camera\> est définie par le point duquel on regarde (origin), ainsi qu'un autre point indiquant la direction. Ce deuxième point est dans le plan de projection de la caméra, et l'angle de vue est déterminé par la taille de l'image finale en pixels (pxwidth et pxheight) ainsi que la largeur "réelle" du plan de projection (width). Sa hauteur n'est pas renseignée mais calculée automatiquement, afin d'éviter d'étirer l'image par inadvertence. La modification de pxwidth et pxheight infue autant sur l'angle vertical que sur la résolution de l'image (et donc la longueur de l'execution).
+
+> La rotation de la caméra autour de cet axe est négligée, on considère que le bord bas du plan de projection est toujours horizontal.
 
 À l'intérieur de la balise <lights\>, on peu placer autant de sources de lumière que souhaité, de type <sun\> (source à l'infini) ou de type <lamp\> (source ponctuelle). Chaque source lumineuse doit impérativement être dotée de sa position ainsi que de son intensité (attribut brightness).
 
@@ -104,13 +106,31 @@ Voici par exemple le fichier XML qui a servi à synthétiser l'image en tête du
 </world>
 ```
 
+> **Attention :**  Le code permettant de lire le fichier xml ne contient pas encore de vérification quant au respect de la syntaxe.  
+Un fichier mal écrit a de fortes chances de mener à une *Segmentation Fault*.
+
 ##Structure du projet
 
 Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on a pensé à une représention graphique des fonctionnalités désagrégées de notre programme :
 .... // Image dont tu parles
 
 De prime à bord, notre code est basé sur 02 grands groupes de fichiers. L'un modélisant les objets sur notre scène et l'autre pour l'implémentation des opérations sur ceux-ci.
-C'est aisni qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera. Et les 
+C'est ainsi qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera, environment. Et de l'autre, shape, raytracing, tinyxml2.
+
+En prenant le cas particulier du fichier math_objects (le plus large de tous), on y retrouv 
+Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
+
+Les fichiers sources vont tous par paires, un fichier source c++ (extension .cpp) et son header (extension .hpp). La seule exception est le fichier raytracing.cpp, qui contient la fonction main(). Chaque paire correspond la plupart du temps à une ou plusieurs classes, ainsi les méthodes de classe correspondantes.  
+Le fichier initialization.cpp (et son header correspondant) n'implémente pas une classe, mais la fonction permettant d'initialiser la scène en lisant le fichier xml.
+
+Lors de la compilation séparée, les fichiers objets créés sont stockés dans un dossier **./obj** créé à l'occasion.
+
+**Dependance des classes :**
+
+![Diagramme des dépendances de classes](./images/class_dependencies.svg)
+
+**Description des classes :**
+
 
 
 ##Améliorations possibles

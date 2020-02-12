@@ -5,7 +5,7 @@
 #include "shape.hpp"
 #include "light_source.hpp"
 #include "environment.hpp"
-#include "tinyxml2.h"
+#include "tinyxml2.hpp"
 
 using namespace tinyxml2;
 
