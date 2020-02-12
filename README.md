@@ -112,12 +112,16 @@ Un fichier mal écrit a de fortes chances de mener à une *Segmentation Fault*.
 ##Structure du projet
 
 Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on a pensé à une représention graphique des fonctionnalités désagrégées de notre programme :
-.... // Image dont tu parles
+
+![Décomposition fonctionelle](./images/functional_decomposition.svg)
+
+Il ne fait pas afficher les differents grands axes de notre programme mais aussi l'enchaînement des tâches dans le processus de rendu de l'image.
 
 De prime à bord, notre code est basé sur 02 grands groupes de fichiers. L'un modélisant les objets sur notre scène et l'autre pour l'implémentation des opérations sur ceux-ci.
 C'est ainsi qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera, environment. Et de l'autre, shape, raytracing, tinyxml2.
 
 En prenant le cas particulier du fichier math_objects (le plus large de tous), on y retrouve la définition de tous les objets mathématiques qu'on manipulera dans la résolution de notre problème. La classe Point qui désignera un point quelconque dans notre espace à trois dimensions et la classe Ray décrit des vecteurs au sens mathématique mais sont interprétés ici pour des besoins de correspondance aux rayons (en l'occurrence lumineux) partant d'un point vers un autre point de notre espace.
+
 Avec ça, une "interface" de méthodes spécifiques pour appliquer les opérations mathématiques usuelles qu'on appliquerait sur de tels objets : produit vectoriel, produit scalaire, norme, distance, etc.
 Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
 
