@@ -7,7 +7,7 @@
 #include "initialization.hpp"
 
 int main()
-{	
+{
 	Environment world = initialization("scene.xml");
-	world.raytracing();
+	world.recursive_raytracing();
 }

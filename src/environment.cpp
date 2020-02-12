@@ -67,6 +67,26 @@ Color<float> Environment::color_from_ray(Ray r) const
 	return Color<float>();
 }
 
+Color<float> Environment::recursive_color_from_ray(Ray r, float coeff, unsigned counter) const
+{
+	Point I;
+	int index =  find_first_intersect(r, I);
+	if (index!=-1)
+	{
+		float albedo = shapes[index]->get_albedo();
+		Color<float> color = convert_to_float(shapes[index]->get_color()) * lighting(I, index);
+		if (albedo==0 || coeff<0.01 || counter>3)
+			return color;
+		
+		Ray n = shapes[index]->get_normal_vect(I);
+		Ray newRay = r.reflect(n);
+		Color<float> reflexion = recursive_color_from_ray(newRay, albedo*coeff, counter+1);
+		(reflexion-color).print();
+		return (reflexion*albedo) + (color*(1-albedo));
+	}
+	return Color<float>();
+}
+
 void Environment::raytracing() const
 {
 	std::vector<Color<float>> img;
@@ -79,6 +99,24 @@ void Environment::raytracing() const
 		{
 			// i is horizontal, j is vertical
 			Color<float> c = color_from_ray(ray_from_pixel(i, j));
+			img.push_back(c);
+		}
+	}
+	save_image("image.ppm", camera.get_pxwidth(), camera.get_pxheight(), img);
+}
+
+void Environment::recursive_raytracing() const
+{
+	std::vector<Color<float>> img;
+	unsigned w = camera.get_pxwidth();
+	unsigned h = camera.get_pxheight();
+	
+	for (unsigned j = 0; j < h; ++j)
+	{
+		for (unsigned i = 0; i < w; ++i)
+		{
+			// i is horizontal, j is vertical
+			Color<float> c = recursive_color_from_ray(ray_from_pixel(i, j), 1, 0);
 			img.push_back(c);
 		}
 	}

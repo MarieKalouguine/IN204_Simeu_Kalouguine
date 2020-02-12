@@ -1,6 +1,8 @@
 #ifndef COLOR_HPP
 #define COLOR_HPP
 
+#include <iostream>
+
 /**
  * Color is stored as a tuple of doubles (red, green, blue)
  */
@@ -35,10 +37,15 @@ public:
 	{
 		return Color(r-c.r, g-c.g, b-c.b);
 	}
+	void print()
+	{
+		std::cout << "{" << r << ", " << g << ", " << b << "}\n";
+	}
 	
 private:
 	T r, g, b;
 };
+
 
 Color<float> convert_to_float(const Color<unsigned char>& c);
 

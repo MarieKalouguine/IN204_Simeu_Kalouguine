@@ -43,7 +43,7 @@ public:
 	}
 	Color<unsigned char> get_color(const Point& I) const;
 	bool is_crossed (const Ray&, Point&) const;
-	Ray get_normal_vect(const Point&) const;
+	Ray get_normal_vect(const Point&) const;	//normal and unitary vector
 private:
 	Point center;
 	double size;

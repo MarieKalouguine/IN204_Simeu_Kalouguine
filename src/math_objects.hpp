@@ -109,9 +109,9 @@ public:
 	
 	void print() const
 	{
-		std::cout << "(" << origin.get_x() << ", " << origin.get_y() << ", " << origin.get_y() << ")";
+		std::cout << "(" << origin.get_x() << ", " << origin.get_y() << ", " << origin.get_z() << ")";
 		std::cout <<" -> ";
-		std::cout << "(" << dir.get_x() << ", " << dir.get_y() << ", " << dir.get_y() << ")\n";
+		std::cout << "(" << dir.get_x() << ", " << dir.get_y() << ", " << dir.get_z() << ")\n";
 	}
 	Ray operator-() const
 	{
@@ -149,6 +149,14 @@ public:
 	{
 		double length = sqrt(origin.square_distance_to(dir));
 		return Ray(origin, origin+(dir-origin)/length);
+	}
+	Ray reflect(const Ray& normal)
+	{
+		Point O = normal.get_origin();
+		Point n = normal.get_dir()-O;
+		Point v =dir-origin;
+		double cos = (v*n)*2;
+		return Ray(O, O+v-(n*cos));
 	}
 private:
 	Point origin, dir;	// origin is where the ray starts, dir is any point on the ray (indicates direction)

@@ -43,6 +43,9 @@ class Environment
 		Color<float> color_from_ray(Ray r) const;
 		void raytracing() const;
 		
+		Color<float> recursive_color_from_ray(Ray r, float coeff, unsigned counter) const;
+		void recursive_raytracing() const;
+		
 	private:
 		std::vector<shared_ptr<Shape>> shapes;
 		std::vector<shared_ptr<Light_source>> lights;
