@@ -5,7 +5,22 @@
 ![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image2.png)
 
 ##Description du projet
-blablabla
+
+Depuis la première ligne de code, il a été question pour nous de réaliser un lancer fiable et efficace de rayons. La donnée des objectifs se décline comme suit :
+ Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène
+ Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le
+rendu d’image par lancer de rayons
+Et pour tester l’intégration de ces fonctions,
+ Un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et
+d’afficher le résultat :
+Il s'agit de réaliser un code de calcul de lancer de rayons. Le lancer de rayons est une technique de
+rendu d'images de synthèse simple, mais relativement coûteuse en temps de calcul, connue pour ses
+résultats réalistes obtenus sur les ombres et les reflets.
+Il s'agira donc, ici, de réaliser un moteur de lancer de rayons permettant de rendre des scènes
+composées d'objets géométriques simples tels que des sphères et des plans, au moins. On trouvera cidessous quelques exemples de scènes simples rendues à l'aide de cette technique.
+Les scènes pourront être décrites par le biais d'un petit langage de description de scènes qui sera
+convertit vers les objets définis dans la bibliothèque. Ce langage peut-être soit basé sur de l’XML mais
+encore être un langage ad hoc que vous définissez de manière totalement libre.
 
 ##Utilisation du code pour synthétiser des images
 ####Consignes utilisateur
@@ -99,8 +114,8 @@ Un fichier mal écrit a de fortes chances de mener à une *Segmentation Fault*.
 ##Structure du projet
 
 Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on a pensé à une représention graphique des fonctionnalités désagrégées de notre programme :
-.... // Image dont tu parles
 
+![Functional decomposition of the algorithm](./images/functional_decomposition.svg)
 
 Les fichiers sources sont tous regroupés dans le dossier **src**.  
 Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.   
