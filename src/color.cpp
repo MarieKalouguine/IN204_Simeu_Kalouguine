@@ -19,5 +19,7 @@ Color<unsigned char> color_from_string(const char* s)
 		return Color<unsigned char>(255,255,255);
 	if (!strcmp(s,"black"))
 		return Color<unsigned char>(0,0,0);
+	if (!strcmp(s,"grey"))
+		return Color<unsigned char>(150,150,150);
 	return Color<unsigned char>();
 }

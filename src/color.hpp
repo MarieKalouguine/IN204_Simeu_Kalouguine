@@ -27,6 +27,14 @@ public:
 	{
 		return Color(r*k, g*k, b*k);
 	}
+	Color operator+(Color c) const
+	{
+		return Color(r+c.r, g+c.g, b+c.b);
+	}
+	Color operator-(Color c) const
+	{
+		return Color(r-c.r, g-c.g, b-c.b);
+	}
 	
 private:
 	T r, g, b;
