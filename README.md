@@ -104,10 +104,10 @@ Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on
 
 Il ne fait pas afficher les differents grands axes de notre programme mais aussi l'enchaînement des tâches dans le processus de rendu de l'image.
 
+En prenant le cas particulier du fichier *math_objects* (le plus large de tous), on y retrouve la définition de tous les objets mathématiques qu'on manipulera dans la résolution de notre problème. La classe **Point** qui désignera un point quelconque dans notre espace à trois dimensions et la classe **Ray** décrit des vecteurs au sens mathématique mais sont interprétés ici pour des besoins de correspondance aux rayons (en l'occurrence lumineux) partant d'un point vers un autre point de notre espace.
 
-En prenant le cas particulier du fichier math_objects (le plus large de tous), on y retrouve la définition de tous les objets mathématiques qu'on manipulera dans la résolution de notre problème. La classe Point qui désignera un point quelconque dans notre espace à trois dimensions et la classe Ray décrit des vecteurs au sens mathématique mais sont interprétés ici pour des besoins de correspondance aux rayons (en l'occurrence lumineux) partant d'un point vers un autre point de notre espace.
+Avec ça, une *"interface"* de méthodes spécifiques pour appliquer les opérations mathématiques usuelles qu'on appliquerait sur de tels objets : *produit vectoriel, produit scalaire, norme, distance*, etc.
 
-Avec ça, une "interface" de méthodes spécifiques pour appliquer les opérations mathématiques usuelles qu'on appliquerait sur de tels objets : produit vectoriel, produit scalaire, norme, distance, etc.
 Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
 Les fichiers sources sont tous regroupés dans le dossier **src**.  
 Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.   
@@ -151,7 +151,7 @@ Cette classe comporte les méthodes suivantes :
 	* `Color<float> color_from_ray(Ray r) const` et `void raytracing() const` ont les mêmes rôles, mais n'implémentent pas la récursivité. Ce sont des restes de quand l'algorithme n'implémentait pas encore la réflexion.
 
  **L'algorithme théorique :** 
-
+On commence par 
 ##Améliorations possibles
 
 Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
