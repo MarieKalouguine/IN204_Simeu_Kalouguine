@@ -116,7 +116,8 @@ shared_ptr<Shape> initialize_sphere(XMLElement &sphere)
 	if (color2!=0)
 	{
 		chessed=true;
-		chesscolor = color_from_string(color2);
+		if (strcmp(color2,"default"))	//if the chess color is personalized
+			chesscolor = color_from_string(color2);
 	}
 	double size;
 	sphere.QueryDoubleAttribute("size", &size);
@@ -140,7 +141,8 @@ shared_ptr<Shape> initialize_plane(XMLElement &plane)
 	if (color2!=0)
 	{
 		chessed=true;
-		chesscolor = color_from_string(color2);
+		if (strcmp(color2,"default"))	//if the chess color is personalized
+			chesscolor = color_from_string(color2);
 	}
 	XMLElement *point = plane.FirstChildElement("origin");
 	Point O = initialize_point(*point);

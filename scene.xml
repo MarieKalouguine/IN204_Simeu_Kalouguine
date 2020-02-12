@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <world>
-	<camera pxwidth="600" pxheight="500" width="3.3">
+	<camera pxwidth="1000" pxheight="900" width="3.3">
 		<origin x="1" y="0" z="3"/>
 		<target x="4" y="5" z="2"/>
 	</camera>
@@ -11,9 +11,6 @@
 		</lamp>
 		<lamp brightness="1.5">
 			<point x="10" y="5" z="3"/>
-		</lamp>
-		<lamp brightness="1.5">
-			<point x="15" y="5" z="2"/>
 		</lamp>
 	</lights>
 	<shapes>
@@ -26,7 +23,10 @@
 		<sphere color="red" gloss="0" size="0.3">
 			<point x="9" y="8" z="0.3"/>
 		</sphere>
-		<plane color="blue" gloss="0.1" chess="white">
+		<sphere color="white" gloss="0" size="0.6" chess="default">
+			<point x="7" y="7.5" z="0.6"/>
+		</sphere>
+		<plane color="blue" gloss="0.3" chess="white">
 			<origin x="0" y="0" z="0"/>
 			<normal x="0" y="0" z="1"/>
 		</plane>
