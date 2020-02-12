@@ -118,6 +118,7 @@ De prime à bord, notre code est basé sur 02 grands groupes de fichiers. L'un m
 C'est ainsi qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera, environment. Et de l'autre, shape, raytracing, tinyxml2.
 
 En prenant le cas particulier du fichier math_objects (le plus large de tous), on y retrouve la définition de tous les objets mathématiques qu'on manipulera dans la résolution de notre problème. La classe Point qui désignera un point quelconque dans notre espace à trois dimensions et la classe Ray décrit des vecteurs au sens mathématique mais sont interprétés ici pour des besoins de correspondance aux rayons (en l'occurrence lumineux) partant d'un point vers un autre point de notre espace.
+Avec ça, une "interface" de méthodes spécifiques pour appliquer les opérations mathématiques usuelles qu'on appliquerait sur de tels objets : produit vectoriel, produit scalaire, norme, distance, etc.
 Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
 
 Les fichiers sources vont tous par paires, un fichier source c++ (extension .cpp) et son header (extension .hpp). La seule exception est le fichier raytracing.cpp, qui contient la fonction main(). Chaque paire correspond la plupart du temps à une ou plusieurs classes, ainsi les méthodes de classe correspondantes.  
