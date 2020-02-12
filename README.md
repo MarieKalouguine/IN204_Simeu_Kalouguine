@@ -5,7 +5,22 @@
 ![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image2.png)
 
 ##Description du projet
-blablabla
+
+Depuis la première ligne de code, il a été question pour nous de réaliser un lancer fiable et efficace de rayons. La donnée des objectifs se décline comme suit :
+ Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène
+ Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le
+rendu d’image par lancer de rayons
+Et pour tester l’intégration de ces fonctions,
+ Un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et
+d’afficher le résultat :
+Il s'agit de réaliser un code de calcul de lancer de rayons. Le lancer de rayons est une technique de
+rendu d'images de synthèse simple, mais relativement coûteuse en temps de calcul, connue pour ses
+résultats réalistes obtenus sur les ombres et les reflets.
+Il s'agira donc, ici, de réaliser un moteur de lancer de rayons permettant de rendre des scènes
+composées d'objets géométriques simples tels que des sphères et des plans, au moins. On trouvera cidessous quelques exemples de scènes simples rendues à l'aide de cette technique.
+Les scènes pourront être décrites par le biais d'un petit langage de description de scènes qui sera
+convertit vers les objets définis dans la bibliothèque. Ce langage peut-être soit basé sur de l’XML mais
+encore être un langage ad hoc que vous définissez de manière totalement libre.
 
 ##Utilisation du code pour synthétiser des images
 ####Consignes utilisateur
@@ -169,3 +184,20 @@ Ultimement, il sera question de rassembler toutes les données puisées et trait
 
 Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
 
+* Ajouter de nouveaux types d'objets, tels que des cylindres, des tétraèdres, cubes etc.
+
+* Penser à d'autres dessins que l'échiquier sur les objets
+
+* Faire en sorte de pouvoir rentrer la couleur d'un objet soit en donnant le nom (comme maintenant), soit en donnant les composantes rgb
+
+* Optimiser les ressources calculatoires en parallélisant l'exécution (facilement parallélisable). Ainsi, sur un ordinateur quatre cœurs, l'exécution serait quatre fois plus rapide en la séparant sur les quatre CPU.
+
+* Donner la possibilité d'avoir des objets transparents, avec un coefficient de réfraction donné (un peu compliqué, car il faut toujours avoir trace du coefficient de réfraction du milieu dans lequel on se trouve à un moment donné)
+
+Mais avant d'ajouter des choses en plus, il convient de réparer les incohérences encore présentes dans le code actuel :
+
+* La lumière d'une source lumineuse de type **Lamp** devrait être diffuse, donc l'intensité de l'éclairage devrait diminuer avec la distance.
+
+* L'orientation de l'intérieur et de l'extérieur de l'objet "plan infini" est toujours définie par l'utilisateur, et si celui-ci décide que la normale au plan ne va pas en direction de la caméra, le plan ne sera pas éclairé par les sources lumineuses du côté visible du plan (un objet ne peut pas être éclairé de l'intérieur). Il faut donc modifier l''initialisation de l'objet **Plane** à partir du fichier xml, et faire en sorte que l'extérieur de l'objet soit toujours du côté de la caméra.
+
+* La réflexion implémentée n'est  pas vraiment réaliste, car elle ne permet pas de voir le reflet d'une source lumineuse dans l'objet. Pour rendre un effet plus réaliste, il faudrait que la source lumineuse cesse d'être un point, et prenne du volume. Cela nécessite de repenser en grande partie la structure, mais cela rajouterait beaucoup au projet.
