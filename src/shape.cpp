@@ -25,15 +25,15 @@ bool Sphere::is_crossed (const Ray& ray, Point& I) const
 
 bool Plane::is_crossed (const Ray& ray, Point& I) const
 {
-	double d = origin*normal;	//D is the affine coefficent in the plane equation (ax+by+cz=d)
+	double d = -origin*normal;	//D is the affine coefficent in the plane equation (ax+by+cz+d=0)
 	Point O = ray.get_origin();
 	Point Rd = (ray.get_dir()-O);
 	Rd.unitarize();
 	double a1 = Rd*normal;
-	if (a1>=0)
+	if (a1>=0)	// if the ray is going from the plane
 		return false;
 	double a2 = O*normal;
-	double t = (a2-d)/a1;
+	double t = (a2+d)/a1;
 	I = O - (Rd*t);
 	return true;
 }
@@ -51,7 +51,6 @@ Ray Sphere::get_normal_vect(const Point& P) const
 Ray Plane::get_normal_vect(const Point& P) const
 {
 	Ray vect1(P, P+normal);
-	vect1.unitarize();	//just to be sure
 	return vect1;
 }
 
