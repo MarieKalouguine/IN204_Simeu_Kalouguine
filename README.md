@@ -1,20 +1,36 @@
 #Projet IN204 - Lancer de rayons
-####Par Marie Kalouguine et Davy Privat-Simeu
+####Par Marie Kalouguine et Davy Simeu
 ![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image2.png)
 
 ##Description du projet
-blablabla
+
+Depuis la première ligne de code, il a été question pour nous de réaliser un lancer fiable et efficace de rayons. La donnée des objectifs se décline comme suit :
+ Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène
+ Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le
+rendu d’image par lancer de rayons
+Et pour tester l’intégration de ces fonctions,
+ Un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et
+d’afficher le résultat :
+Il s'agit de réaliser un code de calcul de lancer de rayons. Le lancer de rayons est une technique de
+rendu d'images de synthèse simple, mais relativement coûteuse en temps de calcul, connue pour ses
+résultats réalistes obtenus sur les ombres et les reflets.
+Il s'agira donc, ici, de réaliser un moteur de lancer de rayons permettant de rendre des scènes
+composées d'objets géométriques simples tels que des sphères et des plans, au moins. On trouvera cidessous quelques exemples de scènes simples rendues à l'aide de cette technique.
+Les scènes pourront être décrites par le biais d'un petit langage de description de scènes qui sera
+convertit vers les objets définis dans la bibliothèque. Ce langage peut-être soit basé sur de l’XML mais
+encore être un langage ad hoc que vous définissez de manière totalement libre.
 
 ##Utilisation du code pour synthétiser des images
 
 Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé. La compilation nécessite la version C++11 du compilateur.
 
 Pour compiler le projet, il suffit d'entrer la commande `make` dans la ligne de commande.
-Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier de description de scènes `scene.xml`(se trouvant dans le même répertoire), et synthétiser une image correspondante par lancer de rayons.
+Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier de description de scènes `scene.xml` (se trouvant dans le même répertoire), et synthétiser une image correspondante par lancer de rayons.
 
 Pour tester le programme, modifiez le fichier XML à vos besoins, puis lancez la commande `./raytracing`
 
 ####Description de scènes avec XML
+
 La description d'une scène se fait à l'aide de balises dans le fichier `scene.xml`, dans un langagé basé sur XML. La scène s'apparente ainsi à une structure d'arbre.
 
 À la racine de l'arbre se trouve la balise <world\>, dans laquelle on place les différents objets composant la scène. Parmi eux, il y a la balise caméra <camera\>, l'ensemble des éclairages <lights\>, ainsi que l'ensemble des objets à représenter <shapes\>.
@@ -89,7 +105,13 @@ Voici par exemple le fichier XML qui a servi à synthétiser l'image en tête du
 ```
 
 ##Structure du projet
-blablabla
+
+Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on a pensé à une représention graphique des fonctionnalités désagrégées de notre programme :
+.... // Image dont tu parles
+
+De prime à bord, notre code est basé sur 02 grands groupes de fichiers. L'un modélisant les objets sur notre scène et l'autre pour l'implémentation des opérations sur ceux-ci.
+C'est aisni qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera. Et les 
+
 
 ##Améliorations possibles
 blablabla
