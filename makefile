@@ -29,4 +29,4 @@ $(OBJPATH)%.o : $(SRCPATH)%.cpp $(HEADERS)
 
 
 clean :
-	rm -rf $(OBJPATH) $(SRCPATH)*.ppm *.ppm core main test_*
+	rm -rf $(OBJPATH) $(SRCPATH)*.ppm *.ppm core raytracing test_*
