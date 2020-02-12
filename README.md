@@ -196,5 +196,3 @@ Mais avant d'ajouter des choses en plus, il convient de réparer les incohérenc
 * L'orientation de l'intérieur et de l'extérieur de l'objet "plan infini" est toujours définie par l'utilisateur, et si celui-ci décide que la normale au plan ne va pas en direction de la caméra, le plan ne sera pas éclairé par les sources lumineuses du côté visible du plan (un objet ne peut pas être éclairé de l'intérieur). Il faut donc modifier l''initialisation de l'objet **Plane** à partir du fichier xml, et faire en sorte que l'extérieur de l'objet soit toujours du côté de la caméra.
 
 * La réflexion implémentée n'est  pas vraiment réaliste, car elle ne permet pas de voir le reflet d'une source lumineuse dans l'objet. Pour rendre un effet plus réaliste, il faudrait que la source lumineuse cesse d'être un point, et prenne du volume. Cela nécessite de repenser en grande partie la structure, mais cela rajouterait beaucoup au projet.
-
-![Image de 3 boules réfléchissantes sur un sol rouge/blanc quadrillé](./images/image3.png)
