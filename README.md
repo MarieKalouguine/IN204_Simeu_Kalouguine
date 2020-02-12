@@ -147,3 +147,20 @@ Cette classe comporte les méthodes suivantes :
 
 Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
 
+* Ajouter de nouveaux types d'objets, tels que des cylindres, des tétraèdres, cubes etc.
+
+* Penser à d'autres dessins que l'échiquier sur les objets
+
+* Faire en sorte de pouvoir rentrer la couleur d'un objet soit en donnant le nom (comme maintenant), soit en donnant les composantes rgb
+
+* Optimiser les ressources calculatoires en parallélisant l'exécution (facilement parallélisable). Ainsi, sur un ordinateur quatre cœurs, l'exécution serait quatre fois plus rapide en la séparant sur les quatre CPU.
+
+* Donner la possibilité d'avoir des objets transparents, avec un coefficient de réfraction donné (un peu compliqué, car il faut toujours avoir trace du coefficient de réfraction du milieu dans lequel on se trouve à un moment donné)
+
+Mais avant d'ajouter des choses en plus, il convient de réparer les incohérences encore présentes dans le code actuel :
+
+* La lumière d'une source lumineuse de type **Lamp** devrait être diffuse, donc l'intensité de l'éclairage devrait diminuer avec la distance.
+
+* L'orientation de l'intérieur et de l'extérieur de l'objet "plan infini" est toujours définie par l'utilisateur, et si celui-ci décide que la normale au plan ne va pas en direction de la caméra, le plan ne sera pas éclairé par les sources lumineuses du côté visible du plan (un objet ne peut pas être éclairé de l'intérieur). Il faut donc modifier l''initialisation de l'objet **Plane** à partir du fichier xml, et faire en sorte que l'extérieur de l'objet soit toujours du côté de la caméra.
+
+* La réflexion implémentée n'est  pas vraiment réaliste, car elle ne permet pas de voir le reflet d'une source lumineuse dans l'objet. Pour rendre un effet plus réaliste, il faudrait que la source lumineuse cesse d'être un point, et prenne du volume. Cela nécessite de repenser en grande partie la structure, mais cela rajouterait beaucoup au projet.
