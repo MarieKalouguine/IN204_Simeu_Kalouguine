@@ -73,16 +73,15 @@ Color<float> Environment::recursive_color_from_ray(Ray r, float coeff, unsigned 
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
 	{
-		float albedo = shapes[index]->get_albedo();
-		Color<float> color = convert_to_float(shapes[index]->get_color()) * lighting(I, index);
-		if (albedo==0 || coeff<0.01 || counter>3)
+		float gloss = shapes[index]->get_gloss();
+		Color<float> color = convert_to_float(shapes[index]->get_color(I)) * lighting(I, index);
+		if (gloss==0 || coeff<0.01 || counter>3)
 			return color;
 		
 		Ray n = shapes[index]->get_normal_vect(I);
 		Ray newRay = r.reflect(n);
-		Color<float> reflexion = recursive_color_from_ray(newRay, albedo*coeff, counter+1);
-		(reflexion-color).print();
-		return (reflexion*albedo) + (color*(1-albedo));
+		Color<float> reflexion = recursive_color_from_ray(newRay, gloss*coeff, counter+1);
+		return (reflexion*gloss) + (color*(1-gloss));
 	}
 	return Color<float>();
 }

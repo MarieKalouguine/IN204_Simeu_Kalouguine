@@ -45,7 +45,7 @@ bool Plane::is_crossed (const Ray& ray, Point& I) const
  */
 Ray Sphere::get_normal_vect(const Point& P) const
 {
-	Ray vect1(center, P);
+	Ray vect1(P, P*2-center);
 	vect1.unitarize();
 	return vect1;
 }
