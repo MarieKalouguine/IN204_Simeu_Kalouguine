@@ -4,7 +4,7 @@
      cyan, orange, purple, pink, brown -->
 
 <world>
-	<camera pxwidth="700" pxheight="500" width="3.3">
+	<camera pxwidth="2000" pxheight="500" width="3.3">
 		<origin x="1" y="0" z="3"/>
 		<target x="4" y="5" z="2"/>
 	</camera>
@@ -32,6 +32,7 @@
 		<sphere color="white" gloss="0" size="0.6" chess="default">
 			<point x="7" y="7.5" z="0.6"/>
 		</sphere>
+		
 		<plane color="blue" gloss="0.1" chess="white">
 			<origin x="0" y="0" z="0"/>
 			<normal x="0" y="0" z="1"/>
