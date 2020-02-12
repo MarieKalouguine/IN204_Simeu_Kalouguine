@@ -21,6 +21,21 @@ bool Sphere::is_crossed (const Ray& ray, Point& I) const
 		return false;
 }
 
+bool Plane::is_crossed (const Ray& ray, Point& I) const
+{
+	double d = origin*normal;	//D is the affine coefficent in the plane equation (ax+by+cz=d)
+	Point O = ray.get_origin();
+	Point Rd = (ray.get_dir()-O);
+	Rd.unitarize();
+	double a1 = Rd*normal;
+	if (a1>=0)
+		return false;
+	double a2 = O*normal;
+	double t = (a2-d)/a1;
+	I = O - (Rd*t);
+	return true;
+}
+
 /**
  * Returns the unitary vector that is normal to the surface of the shape, in a given point P.
  */
@@ -28,5 +43,12 @@ Ray Sphere::get_normal_vect(const Point& P) const
 {
 	Ray vect1(center, P);
 	vect1.unitarize();
+	return vect1;
+}
+
+Ray Plane::get_normal_vect(const Point& P) const
+{
+	Ray vect1(P, P+normal);
+	vect1.unitarize();	//just to be sure
 	return vect1;
 }

@@ -19,5 +19,6 @@ shared_ptr<Light_source> initialize_lamp(XMLElement &lamp);
 shared_ptr<Light_source> initialize_sun(XMLElement &sun);
 
 shared_ptr<Shape> initialize_sphere(XMLElement &sphere);
+shared_ptr<Shape> initialize_plane(XMLElement &plane);
 
 #endif

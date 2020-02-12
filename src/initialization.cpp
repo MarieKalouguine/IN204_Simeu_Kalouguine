@@ -44,6 +44,13 @@ Environment initialization(const std::string &filename)
 		world.add_shape(initialize_sphere(*sphere));
 		sphere = sphere->NextSiblingElement("sphere");
 	}
+	//find planes
+	XMLElement *plane = shapes->FirstChildElement("plane");
+	while (plane)
+	{
+		world.add_shape(initialize_plane(*plane));
+		plane = plane->NextSiblingElement("plane");
+	}
 	
 	return world;
 }
@@ -100,12 +107,28 @@ shared_ptr<Shape> initialize_sphere(XMLElement &sphere)
 	char* color;
 	sphere.QueryStringAttribute("color", (const char**)&color);
 	Color<unsigned char> col = color_from_string(color);
-	float albedo;
-	sphere.QueryFloatAttribute("albedo", &albedo);
+	float gloss;
+	sphere.QueryFloatAttribute("gloss", &gloss);
 	double size;
 	sphere.QueryDoubleAttribute("size", &size);
 	XMLElement *point = sphere.FirstChildElement("point");
 	Point O = initialize_point(*point);
 	
-	return shared_ptr<Shape>(new Sphere(col, albedo, O , size));
+	return shared_ptr<Shape>(new Sphere(col, gloss, O , size));
+}
+
+shared_ptr<Shape> initialize_plane(XMLElement &plane)
+{
+	char* color;
+	plane.QueryStringAttribute("color", (const char**)&color);
+	Color<unsigned char> col = color_from_string(color);
+	float gloss;
+	plane.QueryFloatAttribute("gloss", &gloss);
+	XMLElement *point = plane.FirstChildElement("origin");
+	Point O = initialize_point(*point);
+	point = plane.FirstChildElement("normal");
+	Point n = initialize_point(*point);
+	n.unitarize();
+	
+	return shared_ptr<Shape>(new Plane(col, gloss, O, n));
 }

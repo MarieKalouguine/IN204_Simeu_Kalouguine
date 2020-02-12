@@ -10,7 +10,7 @@
 class Shape
 {
 public:
-	Shape(Color<unsigned char> col, float alb): color(col), gloss(alb) {};
+	Shape(Color<unsigned char> col, float glos): color(col), gloss(glos) {};
 	Color<unsigned char> get_color() const
 	{
 		return color;
@@ -32,7 +32,7 @@ private:
 class Sphere : public Shape
 {
 public:
-	Sphere(Color<unsigned char> col, float reflex, const Point& O , double r): Shape(col, reflex), center(O), size(r){};
+	Sphere(Color<unsigned char> col, float gloss, const Point& O , double r): Shape(col, gloss), center(O), size(r){};
 	Point get_center() const
 	{
 		return center;
@@ -46,6 +46,28 @@ public:
 private:
 	Point center;
 	double size;
+};
+
+/**
+ * A plane is a particular form of shape
+ */
+class Plane : public Shape
+{
+public:
+	Plane(Color<unsigned char> col, float gloss, const Point& O , const Point& n): Shape(col, gloss), origin(O), normal(n) {};
+	Point get_origin() const
+	{
+		return origin;
+	}
+	Point get_normal() const
+	{
+		return normal;
+	}
+	bool is_crossed (const Ray&, Point&) const;
+	Ray get_normal_vect(const Point&) const;
+private:
+	Point origin;	//any point on the plane
+	Point normal;
 };
 
 #endif

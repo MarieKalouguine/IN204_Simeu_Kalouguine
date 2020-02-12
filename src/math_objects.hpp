@@ -32,6 +32,9 @@ public:
 	void print() const{
 		std::cout << "(" << x << ", " << y << ", " << z << ")\n";
 	}
+	Point operator-() const {
+		return Point(-x, -y, -z);
+	}
 	Point operator+(const Point& P) const {
 		return Point(x+P.x, y+P.y, z+P.z);
 	}
@@ -62,6 +65,12 @@ public:
 		x = x/length;
 		y = y/length;
 		z = z/length;
+	}
+	Point unitarized() const
+	{
+		Point copy = *this;
+		copy.unitarize();
+		return copy;
 	}
 	
 	double square_distance_to(const Point& P) const
