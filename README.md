@@ -1,24 +1,11 @@
 #Projet IN204 - Lancer de rayons
-####Par Marie Kalouguine et Davy Simeu
+
+####Par Marie Kalouguine et Davy Privat-Simeu
+
 ![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image2.png)
 
 ##Description du projet
-
-Depuis la première ligne de code, il a été question pour nous de réaliser un lancer fiable et efficace de rayons. La donnée des objectifs se décline comme suit :
- Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène
- Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le
-rendu d’image par lancer de rayons
-Et pour tester l’intégration de ces fonctions,
- Un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et
-d’afficher le résultat :
-Il s'agit de réaliser un code de calcul de lancer de rayons. Le lancer de rayons est une technique de
-rendu d'images de synthèse simple, mais relativement coûteuse en temps de calcul, connue pour ses
-résultats réalistes obtenus sur les ombres et les reflets.
-Il s'agira donc, ici, de réaliser un moteur de lancer de rayons permettant de rendre des scènes
-composées d'objets géométriques simples tels que des sphères et des plans, au moins. On trouvera cidessous quelques exemples de scènes simples rendues à l'aide de cette technique.
-Les scènes pourront être décrites par le biais d'un petit langage de description de scènes qui sera
-convertit vers les objets définis dans la bibliothèque. Ce langage peut-être soit basé sur de l’XML mais
-encore être un langage ad hoc que vous définissez de manière totalement libre.
+blablabla
 
 ##Utilisation du code pour synthétiser des images
 ####Consignes utilisateur
@@ -26,7 +13,7 @@ encore être un langage ad hoc que vous définissez de manière totalement libre
 Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé. La compilation nécessite la version C++11 du compilateur.
 
 Pour compiler le projet, il suffit d'entrer la commande `make` dans la ligne de commande.
-Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier de description de scènes `scene.xml` (se trouvant dans le même répertoire), et synthétiser une image correspondante par lancer de rayons.
+Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier de description de scènes `scene.xml`(se trouvant dans le même répertoire), et synthétiser une image correspondante par lancer de rayons.
 
 Pour tester le programme, modifiez le fichier XML à vos besoins, puis lancez la commande `./raytracing`
 
@@ -111,13 +98,6 @@ Un fichier mal écrit a de fortes chances de mener à une *Segmentation Fault*.
 
 ##Structure du projet
 
-Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on a pensé à une représention graphique des fonctionnalités désagrégées de notre programme :
-.... // Image dont tu parles
-
-De prime à bord, notre code est basé sur 02 grands groupes de fichiers. L'un modélisant les objets sur notre scène et l'autre pour l'implémentation des opérations sur ceux-ci.
-C'est ainsi qu'on a d'un côté, les fichiers .cpp (avec les définitions .hpp associés) math_objects, color, light_source, camera, environment. Et de l'autre, shape, raytracing, tinyxml2.
-
-En prenant le cas particulier du fichier math_objects (le plus large de tous), on y retrouv 
 Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
 
 Les fichiers sources vont tous par paires, un fichier source c++ (extension .cpp) et son header (extension .hpp). La seule exception est le fichier raytracing.cpp, qui contient la fonction main(). Chaque paire correspond la plupart du temps à une ou plusieurs classes, ainsi les méthodes de classe correspondantes.  
@@ -148,7 +128,9 @@ La classe **Light_source** a deux classes filles **Sun** et **Lamp**, qui sont l
 * La classe **Camera** implémente, comme son nom l'indique, la caméra qui permet d'observer la scène. La façon dont elle est définie est expliquée dans la partie "Description de scènes avec XML" du présent document.  
 Sa méthode `Ray ray_from_pixel(unsigned x, unsigned y) const` permet d'obtenir le rayon qui passe par l'origine de la caméra et par un pixel donné sur l'image projetée.
 
-* Ces trois dernières classes sont regroupées dans la classe **Environment**, qui n'est rien d'autre que l'ensemble des objets nécessaires pour construire l'image à synthétiser.
+* La classe **Environment** regroupe ces trois dernières classes, car elle n'est rien d'autre que l'ensemble des objets nécessaires pour construire l'image à synthétiser. Cette classe est la plus compliquée de toutes. Elle comporte une **Camera**, un vecteur de **shared_ptr<Shape\>** et un vecteur de **shared_ptr<Light_source\>**. L'utilisation des *shared_ptr* est nécessaire car les différentes classes filles ne prennent pas toutes le même espace mémoire, et un vecteur ne peut donner qu'un espacce constant pour chaque élément.  
+Cette classe comporte les méthodes suivantes :
+	
 
 ##Améliorations possibles
 blablabla
