@@ -130,7 +130,14 @@ Sa méthode `Ray ray_from_pixel(unsigned x, unsigned y) const` permet d'obtenir 
 
 * La classe **Environment** regroupe ces trois dernières classes, car elle n'est rien d'autre que l'ensemble des objets nécessaires pour construire l'image à synthétiser. Cette classe est la plus compliquée de toutes. Elle comporte une **Camera**, un vecteur de **shared_ptr<Shape\>** et un vecteur de **shared_ptr<Light_source\>**. L'utilisation des *shared_ptr* est nécessaire car les différentes classes filles ne prennent pas toutes le même espace mémoire, et un vecteur ne peut donner qu'un espacce constant pour chaque élément.  
 Cette classe comporte les méthodes suivantes :
-	
+	* `int find_first_intersect(const Ray& r, Point& I) const` permet de trouver l'intersection la plus proche d'un rayon avec les objets de la scène. La valeur renvoyée vaut -1 s'il n'y a pas d'intersection, et l'indice de l'objet rencontré sinon. Le point d'intersection est renvoyé par référence.
+	* `float lighting(const Point&, unsigned) const` permet d'obtenir l'éclairage d'un point sur un objet, en prenant en compte toutes les sources de lumière ainsi que les ombres des autres objets.
+	* `Ray ray_from_pixel(unsigned x, unsigned y) const` permet d'obtenir le rayon depuis l'origine de la caméra, et correspondant à un pixel donné. Cette méthode réutilise une méthode de la classe **Camera**.
+	* `Color<float> recursive_color_from_ray(Ray r, float coeff, unsigned counter) const` permet d'obtenir la couleur d'un rayon donné en comptant l'éclairage et les réflexions contre la surface. Les variables *coeff* et *counter* permettent d'arrêter la récursion.
+	* `void recursive_raytracing() const` reprend les deux dernières méthodes pour construire l'image complète, en parcourant tous les pixels et en calculant ainsi leur couleur.
+	* `Color<float> color_from_ray(Ray r) const` et `void raytracing() const` ont les mêmes rôles, mais n'implémentent pas la récursivité. Ce sont des restes de quand l'algorithme n'implémentait pas encore la réflexion.
 
 ##Améliorations possibles
-blablabla
+
+Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
+
