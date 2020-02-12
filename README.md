@@ -151,7 +151,20 @@ Cette classe comporte les méthodes suivantes :
 	* `Color<float> color_from_ray(Ray r) const` et `void raytracing() const` ont les mêmes rôles, mais n'implémentent pas la récursivité. Ce sont des restes de quand l'algorithme n'implémentait pas encore la réflexion.
 
  **L'algorithme théorique :** 
-On commence par 
+
+On commence par charger notre environnement prédéfini (dans le fichier le XML prévu à cet effet) avec source(s) lumineuse(s), objets massiques, camera, scène (plancher).
+Ensuite, viennent en "parallèle" les trois routines suivantes : 
+
+* Le calcul de l'éclairage en un point donné de l'espace.
+* L'intersection d'un rayon lumineux venant d'une source lumineuseavec un objet massique déposé sur notre scène.
+* Le calcul du rayon équivalent à un pixel donné sur le plan d'affichage de la camera.
+
+La mise en marche commune de ces trois là permet de retrouver la couleur du pixel qui est en fait la couleur du point provenant de l'objet massique sur lequel y a eu l'intersection qui se retrouve juste projéter sur le plan d'affichage de la camera.
+
+On exécute alors ce bloc de façon itérative sur les rayons lumineux et par ricochet les intersections (donc les points sur les objets massiques présents sur la scène). Et une fois qu'on a couvert tout l'ensemble des objets (jusqu'à ce qu'il ne puisse plus y avoir d'intersection) on passe à la suite.
+
+Ultimement, il sera question de rassembler toutes les données puisées et traitées pour les injecter dans le module de création et d'affichage d'image de la librairie TinyXML2. On génère ainsi une image représentant correctement la scène (si tout s'est passé comme prévu) en conservant le caractère réfléchissant ou non des précédents objets massiques.
+
 ##Améliorations possibles
 
 Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
