@@ -6,26 +6,21 @@
 
 ##Description du projet
 
-Depuis la première ligne de code, il a été question pour nous de réaliser un lancer fiable et efficace de rayons. La donnée des objectifs se décline comme suit :
- Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène
- Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le
-rendu d’image par lancer de rayons
-Et pour tester l’intégration de ces fonctions,
- Un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et
-d’afficher le résultat :
-Il s'agit de réaliser un code de calcul de lancer de rayons. Le lancer de rayons est une technique de
-rendu d'images de synthèse simple, mais relativement coûteuse en temps de calcul, connue pour ses
-résultats réalistes obtenus sur les ombres et les reflets.
-Il s'agira donc, ici, de réaliser un moteur de lancer de rayons permettant de rendre des scènes
-composées d'objets géométriques simples tels que des sphères et des plans, au moins. On trouvera cidessous quelques exemples de scènes simples rendues à l'aide de cette technique.
-Les scènes pourront être décrites par le biais d'un petit langage de description de scènes qui sera
-convertit vers les objets définis dans la bibliothèque. Ce langage peut-être soit basé sur de l’XML mais
-encore être un langage ad hoc que vous définissez de manière totalement libre.
+Ce projet qui a été mené sur plusieurs mois consistait à implémenter en C++ un algorithme de lancer de rayons fiable et efficace pour synthétiser des "photos" d'objets tridimensionnels. La donnée des objectifs se décline comme suit :
+
+* Fournir une bibliothèque d’objets permettant de décrire les éléments composant une scène.
+ 
+* Fournir une bibliothèque d’objets permettant d’implanter différents moteurs implantant le rendu d’image par lancer de rayons.
+
+* Et pour tester l’intégration de ces fonctions, un environnement permettant de spécifier les scènes, de lancer l’exécution des moteurs et d’afficher le résultat.
+Il s'agit de réaliser un code de calcul de lancer de rayons.
+
+Ces objectifs ont été atteints au cours du projet, et l'image affichée en tête de ce fichier a été réalisée avec le code que nous avons écrit.
 
 ##Utilisation du code pour synthétiser des images
 ####Consignes utilisateur
 
-Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé. La compilation nécessite la version C++11 du compilateur.
+Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé pour tester le code. La compilation nécessite un compilateur C++11.
 
 Pour compiler le projet, il suffit d'entrer la commande `make` dans la ligne de commande.
 Cela crée un fichier exécutable `raytracing`, qui permet d'analyser le fichier de description de scènes `scene.xml`(se trouvant dans le même répertoire), et synthétiser une image correspondante par lancer de rayons.
@@ -40,6 +35,10 @@ La description d'une scène se fait à l'aide de balises dans le fichier `scene.
 Une caméra <camera\> est définie par le point duquel on regarde (origin), ainsi qu'un autre point indiquant la direction. Ce deuxième point est dans le plan de projection de la caméra, et l'angle de vue est déterminé par la taille de l'image finale en pixels (pxwidth et pxheight) ainsi que la largeur "réelle" du plan de projection (width). Sa hauteur n'est pas renseignée mais calculée automatiquement, afin d'éviter d'étirer l'image par inadvertence. La modification de pxwidth et pxheight infue autant sur l'angle vertical que sur la résolution de l'image (et donc la longueur de l'execution).
 
 > La rotation de la caméra autour de cet axe est négligée, on considère que le bord bas du plan de projection est toujours horizontal.
+
+**Représentation mathématique d'une caméra :**
+
+![Représentation mathématique d'une caméra](./images/camera.png)
 
 À l'intérieur de la balise <lights\>, on peu placer autant de sources de lumière que souhaité, de type <sun\> (source à l'infini) ou de type <lamp\> (source ponctuelle). Chaque source lumineuse doit impérativement être dotée de sa position ainsi que de son intensité (attribut brightness).
 
@@ -117,11 +116,7 @@ Pour réussir à couvrir l'ensemble des spécifications énoncées plus haut, on
 
 ![Décomposition fonctionelle](./images/functional_decomposition.svg)
 
-Il ne fait pas afficher les differents grands axes de notre programme mais aussi l'enchaînement des tâches dans le processus de rendu de l'image.
-
-En prenant le cas particulier du fichier *math_objects* (le plus large de tous), on y retrouve la définition de tous les objets mathématiques qu'on manipulera dans la résolution de notre problème. La classe **Point** qui désignera un point quelconque dans notre espace à trois dimensions et la classe **Ray** décrit des vecteurs au sens mathématique mais sont interprétés ici pour des besoins de correspondance aux rayons (en l'occurrence lumineux) partant d'un point vers un autre point de notre espace.
-
-Avec ça, une *"interface"* de méthodes spécifiques pour appliquer les opérations mathématiques usuelles qu'on appliquerait sur de tels objets : *produit vectoriel, produit scalaire, norme, distance*, etc.
+La réalisaton d'un lancer de rayons réaliste avec les réflexions des rayons lumineux nécessite un algorithme récursif, comme en témoignent les deux boucles présentes dans le diagramme ci-dessus.
 
 Le projet est séparé en plusieurs fichiers source, tous regroupés dans le dossier **src**. Le dossier **test** contient des tests unitaires qui ont été utilisés pour développer la syntaxe xml ainsi que la souvegarde d'une image au format .ppm depuis un tableau de couleurs rgb.
 Les fichiers sources sont tous regroupés dans le dossier **src**.  
