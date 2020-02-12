@@ -76,7 +76,7 @@ Color<unsigned char> Sphere::get_color(const Point& I) const
 		int lon = (int) (acos(v*Point(1,0,0))*2);
 		if ((lon+lat)%2==1)
 		{
-			return color_from_string("white");
+			return chesscolor;
 		}
 		return color;
 	}
@@ -106,7 +106,7 @@ Color<unsigned char> Plane::get_color(const Point& I) const
 			lat = lat+1;
 		if ((lon+lat)%2==1)
 		{
-			return color_from_string("white");
+			return chesscolor;
 		}
 		return color;
 	}

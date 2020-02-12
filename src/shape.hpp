@@ -10,7 +10,7 @@
 class Shape
 {
 public:
-	Shape(Color<unsigned char> col, float glos, bool chess): color(col), chessed(chess), gloss(glos) {};
+	Shape(Color<unsigned char> col, float glos, bool chess, Color<unsigned char> chesscol): color(col), chessed(chess), chesscolor(chesscol), gloss(glos) {};
 	float get_gloss() const
 	{
 		return gloss;
@@ -21,6 +21,7 @@ public:
 protected:
 	Color<unsigned char> color;
 	bool chessed;	//true if the shape has a white chess pattern on it
+	Color<unsigned char> chesscolor;	//color of the chess pattern (default if there is none)
 private:
 	float gloss;
 };
@@ -31,7 +32,7 @@ private:
 class Sphere : public Shape
 {
 public:
-	Sphere(Color<unsigned char> col, float gloss, bool chess, const Point& O , double r): Shape(col, gloss, chess), center(O), size(r){};
+	Sphere(Color<unsigned char> col, float gloss, bool chess, Color<unsigned char> chesscol, const Point& O , double r): Shape(col, gloss, chess, chesscol), center(O), size(r){};
 	Point get_center() const
 	{
 		return center;
@@ -54,7 +55,7 @@ private:
 class Plane : public Shape
 {
 public:
-	Plane(Color<unsigned char> col, float gloss, bool chess, const Point& O , const Point& n): Shape(col, gloss, chess), origin(O), normal(n) {};
+	Plane(Color<unsigned char> col, float gloss, bool chess, Color<unsigned char> chesscol, const Point& O , const Point& n): Shape(col, gloss, chess, chesscol), origin(O), normal(n) {};
 	Point get_origin() const
 	{
 		return origin;

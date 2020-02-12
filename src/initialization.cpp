@@ -109,14 +109,21 @@ shared_ptr<Shape> initialize_sphere(XMLElement &sphere)
 	Color<unsigned char> col = color_from_string(color);
 	float gloss;
 	sphere.QueryFloatAttribute("gloss", &gloss);
-	bool chessed;
-	sphere.QueryBoolAttribute("chessed", &chessed);
+	bool chessed=false;
+	Color<unsigned char> chesscolor = color_from_string("white")-col;
+	char* color2=0;
+	sphere.QueryStringAttribute("chess", (const char**)&color2);
+	if (color2!=0)
+	{
+		chessed=true;
+		chesscolor = color_from_string(color2);
+	}
 	double size;
 	sphere.QueryDoubleAttribute("size", &size);
 	XMLElement *point = sphere.FirstChildElement("point");
 	Point O = initialize_point(*point);
 	
-	return shared_ptr<Shape>(new Sphere(col, gloss, chessed, O , size));
+	return shared_ptr<Shape>(new Sphere(col, gloss, chessed, chesscolor, O , size));
 }
 
 shared_ptr<Shape> initialize_plane(XMLElement &plane)
@@ -126,13 +133,20 @@ shared_ptr<Shape> initialize_plane(XMLElement &plane)
 	Color<unsigned char> col = color_from_string(color);
 	float gloss;
 	plane.QueryFloatAttribute("gloss", &gloss);
-	bool chessed;
-	plane.QueryBoolAttribute("chessed", &chessed);
+	bool chessed=false;
+	Color<unsigned char> chesscolor = color_from_string("white")-col;
+	char* color2=0;
+	plane.QueryStringAttribute("chess", (const char**)&color2);
+	if (color2!=0)
+	{
+		chessed=true;
+		chesscolor = color_from_string(color2);
+	}
 	XMLElement *point = plane.FirstChildElement("origin");
 	Point O = initialize_point(*point);
 	point = plane.FirstChildElement("normal");
 	Point n = initialize_point(*point);
 	n.unitarize();
 	
-	return shared_ptr<Shape>(new Plane(col, gloss, chessed, O, n));
+	return shared_ptr<Shape>(new Plane(col, gloss, chessed, chesscolor, O, n));
 }
