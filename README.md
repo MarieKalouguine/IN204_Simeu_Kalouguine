@@ -181,11 +181,11 @@ Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour ob
 
 * Ajouter de nouveaux types d'objets, tels que des cylindres, des tétraèdres, cubes etc.
 
-* Penser à d'autres dessins que l'échiquier sur les objets
-
 * Faire en sorte de pouvoir rentrer la couleur d'un objet soit en donnant le nom (comme maintenant), soit en donnant les composantes rgb
 
 * Optimiser les ressources calculatoires en parallélisant l'exécution (facilement parallélisable). Ainsi, sur un ordinateur quatre cœurs, l'exécution serait quatre fois plus rapide en la séparant sur les quatre CPU.
+
+* Optimiser le calcul de l'intersection la plus proche pour un grand nombre d'objets (par fractionnement de l'espace par exemple).
 
 * Donner la possibilité d'avoir des objets transparents, avec un coefficient de réfraction donné (un peu compliqué, car il faut toujours avoir trace du coefficient de réfraction du milieu dans lequel on se trouve à un moment donné)
 
