@@ -70,6 +70,7 @@ Color<float> Environment::color_from_ray(const Ray& r) const
 
 Color<float> Environment::recursive_color_from_ray(const Ray& r, float coeff, unsigned counter) const
 {
+	//if we are looking in the direction of a light source, we should be able to see it :
 	float light_img = 0;
 	unsigned i;
 	for(i = 0; i < lights.size(); i++)
@@ -77,9 +78,11 @@ Color<float> Environment::recursive_color_from_ray(const Ray& r, float coeff, un
 		Ray light = lights[i]->ray_from_point(r.get_origin()).unitarized();
 		Ray sight = r.unitarized();
 		float cos = light*sight;
-		float sin_sq = 1 - cos*cos;
-		//if (sin_sq<0.1)
-		light_img = light_img + lights[i]->get_brightness() * exp(-sin_sq*100);
+		if (cos>0)
+		{
+			float sin_sq = 1 - cos*cos;
+			light_img = light_img + lights[i]->get_brightness() * exp(-sin_sq*100);
+		}
 	}
 	
 	Point I;
