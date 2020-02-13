@@ -33,5 +33,7 @@ Color<unsigned char> color_from_string(const char* s)
 		return Color<unsigned char>(255, 125, 225);
 	if (!strcmp(s,"brown"))
 		return Color<unsigned char>(138, 72, 41);
+	if (!strcmp(s,"dark green"))
+		return Color<unsigned char>(7, 105, 0);
 	return Color<unsigned char>();
 }

@@ -1,41 +1,61 @@
 <?xml version="1.0"?>
 <!-- Availible colors:
      red, green, blue, white, black, grey, yellow,
-     cyan, orange, purple, pink, brown -->
+     cyan, orange, purple, pink, brown, dark green -->
 
-     <world>
-		 <camera pxwidth="800" pxheight="600" width="3.3">
-			 <origin x="1" y="0" z="3"/>
-			 <target x="4" y="5" z="2"/>
-		 </camera>
-		 <lights>
-			 <lamp brightness="1.5">
-				 <point x="5" y="5" z="4"/>
-			 </lamp>
-			 <lamp brightness="1.5">
-				 <point x="10" y="5" z="3"/>
-			 </lamp>
-			 <lamp brightness="1.5">
-				 <point x="13" y="7" z="2"/>
-			 </lamp>
-		 </lights>
-		 <shapes>
-			 <sphere color="red" gloss="0" size="1.5" chess="green">
-				 <point x="9" y="11" z="1.5"/>
-			 </sphere>
-			 <sphere color="grey" gloss="1" size="1">
-				 <point x="6" y="11" z="1"/>
-			 </sphere>
-			 <sphere color="red" gloss="0" size="0.3">
-				 <point x="9" y="8" z="0.3"/>
-			 </sphere>
-			 <sphere color="purple" gloss="0.2" size="0.6">
-				 <point x="7" y="7.5" z="0.6"/>
-			 </sphere>
-			 
-			 <plane color="blue" gloss="0.1" chess="white">
-				 <origin x="0" y="0" z="0"/>
-				 <normal x="0" y="0" z="1"/>
-			 </plane>
-		 </shapes>
-	 </world>
+<world>
+	<camera pxwidth="800" pxheight="600" width="3.3">
+		<origin x="1" y="0" z="3"/>
+		<target x="4" y="5" z="2"/>
+	</camera>
+	<lights>
+		<lamp brightness="1.5">
+			<point x="5" y="5" z="4"/>
+		</lamp>
+		<lamp brightness="1.5">
+			<point x="10" y="5" z="3"/>
+		</lamp>
+		<lamp brightness="1.5">
+			<point x="13" y="7" z="2"/>
+		</lamp>
+	</lights>
+	<shapes>
+		<sphere color="red" gloss="0" size="1.5" chess="green">
+			<point x="9" y="11" z="1.5"/>
+		</sphere>
+		<sphere color="grey" gloss="1" size="1">
+			<point x="6" y="11" z="1"/>
+		</sphere>
+		<sphere color="red" gloss="0" size="0.3">
+			<point x="9" y="8" z="0.3"/>
+		</sphere>
+		<sphere color="white" gloss="0" size="0.6" chess="default">
+			<point x="7" y="7.5" z="0.6"/>
+		</sphere>
+		
+		<plane color="blue" gloss="0.1" chess="white">
+			<origin x="0" y="0" z="0"/>
+			<normal x="0" y="0" z="1"/>
+		</plane>
+		<plane color="white" gloss="0">
+			<origin x="20" y="20" z="0"/>
+			<normal x="-3" y="-1" z="0"/>
+		</plane>
+		<plane color="white" gloss="0">
+			<origin x="20" y="20" z="0"/>
+			<normal x="1" y="-3" z="0"/>
+		</plane>
+		<plane color="white" gloss="0">
+			<origin x="-20" y="-20" z="0"/>
+			<normal x="3" y="1" z="0"/>
+		</plane>
+		<plane color="white" gloss="0">
+			<origin x="-20" y="-20" z="0"/>
+			<normal x="-1" y="3" z="0"/>
+		</plane>
+		<plane color="white" gloss="0">
+			<origin x="0" y="0" z="50"/>
+			<normal x="0" y="0" z="-1"/>
+		</plane>
+	</shapes>
+</world>

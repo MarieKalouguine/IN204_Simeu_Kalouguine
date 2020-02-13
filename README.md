@@ -45,7 +45,7 @@ Une caméra <camera\> est définie par le point duquel on regarde (origin), ains
 À l'intérieur de la balise <shapes\>, on peu placer autant d'objets que souhaité, de type <sphere\> (sphère) ou de type <plane\> (plan infini). Tout objet est muni d'une couleur (attribut color), d'une réflexivité (attribut gloss). Un attribut supplémentaire chess peut être ajouté pour décorer la surface de l'objet avec un échiquier. La valeur de l'attribut doit valoir la couleur de l'échiquier à apposer. La valeur "default" lui donne la couleur opposée à celle de l'objet (un objet bleu obtient alors un échiquier orange).
 
 Les couleurs pouvant être utilisées sont :  
-red, green, blue, white, black, grey, yellow, cyan, orange, purple, pink, brown
+red, green, blue, white, black, grey, yellow, cyan, orange, purple, pink, brown, dark green.
 
 Voici par exemple le fichier XML qui a servi à synthétiser l'image en tête du présent document :
 ```

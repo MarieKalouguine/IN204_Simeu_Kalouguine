@@ -78,12 +78,15 @@ Color<float> Environment::recursive_color_from_ray(const Ray& r, float coeff, un
 		Ray light = lights[i]->ray_from_point(r.get_origin()).unitarized();
 		Ray sight = r.unitarized();
 		float cos = light*sight;
-		Point P2;
-		int j = find_first_intersect(light, P2);
-		if (cos>0 && (j==-1 || lights[i]->not_shaded(r.get_origin(), P2)))	//if we are looking towards the light and nothing hides the view
+		if (cos>0)	//if we are looking towards the light
 		{
-			float sin_sq = 1 - cos*cos;
-			light_img = light_img + lights[i]->get_brightness() * exp(-sin_sq*100);
+			Point P2;
+			int j = find_first_intersect(light, P2);
+			if (j==-1 || lights[i]->not_shaded(r.get_origin(), P2))	// and if nothing hides the view
+			{
+				float sin_sq = 1 - cos*cos;
+				light_img = light_img + lights[i]->get_brightness() * exp(-sin_sq*100);
+			}
 		}
 	}
 	
