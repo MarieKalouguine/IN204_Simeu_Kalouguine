@@ -46,7 +46,7 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 		{
 			Point P2;
 			int j = find_first_intersect(ray, P2);
-			if (j==-1 || j==(int)index_shape || lights[i]->not_shaded(P, P2))	// if there is no other shape between the point P and the light source
+			if (j==-1 || lights[i]->not_shaded(P, P2))	// if there is no other shape between the point P and the light source
 			{
 				ray.unitarize();
 				result = result + (ray*n)*(lights[i]->get_brightness());	//scalar product
