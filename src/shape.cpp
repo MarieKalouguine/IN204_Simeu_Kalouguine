@@ -91,7 +91,7 @@ Color<unsigned char> Plane::get_color(const Point& I) const
 	else
 	{
 		Point v1;
-		if (normal==Point(1,0,0))
+		if (normal==Point(1,0,0) || normal==Point(-1,0,0))
 			v1 = normal^Point(0,1,0);
 		else
 			v1 = normal^Point(1,0,0);
