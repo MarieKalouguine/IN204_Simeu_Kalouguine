@@ -2,7 +2,7 @@
 
 ####Par Marie Kalouguine et Davy Simeu
 
-![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image2.png)
+![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image1.png)
 
 ##Description du projet
 
@@ -50,7 +50,7 @@ red, green, blue, white, black, grey, yellow, cyan, orange, purple, pink, brown
 Voici par exemple le fichier XML qui a servi à synthétiser l'image en tête du présent document :
 ```
 <world>
-	<camera pxwidth="2000" pxheight="500" width="3.3">
+	<camera pxwidth="2000" pxheight="1500" width="3.3">
 		<origin x="1" y="0" z="3"/>
 		<target x="4" y="5" z="2"/>
 	</camera>
@@ -177,7 +177,7 @@ Ultimement, il sera question de rassembler toutes les données puisées et trait
 
 ##Améliorations possibles
 
-Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un réalisme parfait. Voici quelques idées pour poursuivre le projet :
+Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un lancer de rayons complet. Voici quelques idées pour poursuivre le projet :
 
 * Ajouter de nouveaux types d'objets, tels que des cylindres, des tétraèdres, cubes etc.
 
@@ -194,5 +194,3 @@ Mais avant d'ajouter des choses en plus, il convient de réparer les incohérenc
 * La lumière d'une source lumineuse de type **Lamp** devrait être diffuse, donc l'intensité de l'éclairage devrait diminuer avec la distance.
 
 * L'orientation de l'intérieur et de l'extérieur de l'objet "plan infini" est toujours définie par l'utilisateur, et si celui-ci décide que la normale au plan ne va pas en direction de la caméra, le plan ne sera pas éclairé par les sources lumineuses du côté visible du plan (un objet ne peut pas être éclairé de l'intérieur). Il faut donc modifier l''initialisation de l'objet **Plane** à partir du fichier xml, et faire en sorte que l'extérieur de l'objet soit toujours du côté de la caméra.
-
-* La réflexion implémentée n'est  pas vraiment réaliste, car elle ne permet pas de voir le reflet d'une source lumineuse dans l'objet. Pour rendre un effet plus réaliste, il faudrait que la source lumineuse cesse d'être un point, et prenne du volume. Cela nécessite de repenser en grande partie la structure, mais cela rajouterait beaucoup au projet.

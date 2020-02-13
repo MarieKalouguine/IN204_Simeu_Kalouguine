@@ -1,5 +1,6 @@
 #include <fstream>
 #include <algorithm>
+#include <math.h>
 
 #include "environment.hpp"
 
@@ -56,7 +57,7 @@ float Environment::lighting(const Point& P, unsigned index_shape) const
 	return (float)result;
 }
 
-Color<float> Environment::color_from_ray(Ray r) const
+Color<float> Environment::color_from_ray(const Ray& r) const
 {
 	Point I;
 	int index =  find_first_intersect(r, I);
@@ -67,14 +68,26 @@ Color<float> Environment::color_from_ray(Ray r) const
 	return Color<float>();
 }
 
-Color<float> Environment::recursive_color_from_ray(Ray r, float coeff, unsigned counter) const
+Color<float> Environment::recursive_color_from_ray(const Ray& r, float coeff, unsigned counter) const
 {
+	float light_img = 0;
+	unsigned i;
+	for(i = 0; i < lights.size(); i++)
+	{
+		Ray light = lights[i]->ray_from_point(r.get_origin()).unitarized();
+		Ray sight = r.unitarized();
+		float cos = light*sight;
+		float sin_sq = 1 - cos*cos;
+		//if (sin_sq<0.1)
+		light_img = light_img + lights[i]->get_brightness() * exp(-sin_sq*100);
+	}
+	
 	Point I;
 	int index =  find_first_intersect(r, I);
 	if (index!=-1)
 	{
 		float gloss = shapes[index]->get_gloss();
-		Color<float> color = convert_to_float(shapes[index]->get_color(I)) * lighting(I, index);
+		Color<float> color = convert_to_float(shapes[index]->get_color(I)) * lighting(I, index) + Color<float>(255,255,255)*light_img;
 		if (gloss==0 || coeff<0.01 || counter>3)
 			return color;
 		
@@ -83,7 +96,7 @@ Color<float> Environment::recursive_color_from_ray(Ray r, float coeff, unsigned 
 		Color<float> reflexion = recursive_color_from_ray(newRay, gloss*coeff, counter+1);
 		return (reflexion*gloss) + (color*(1-gloss));
 	}
-	return Color<float>();
+	return Color<float>(255,255,255)*light_img;
 }
 
 void Environment::raytracing() const

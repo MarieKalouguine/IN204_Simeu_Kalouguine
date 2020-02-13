@@ -136,7 +136,7 @@ public:
 		return Ray(origin, origin+(dir-origin)/k);
 	}
 	
-	double length()
+	double length() const
 	{
 		return (dir - origin).abs();
 	}
@@ -150,7 +150,7 @@ public:
 		double length = sqrt(origin.square_distance_to(dir));
 		return Ray(origin, origin+(dir-origin)/length);
 	}
-	Ray reflect(const Ray& normal)
+	Ray reflect(const Ray& normal) const
 	{
 		Point O = normal.get_origin();
 		Point n = normal.get_dir()-O;

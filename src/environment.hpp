@@ -40,10 +40,10 @@ class Environment
 			return camera.ray_from_pixel(x, y);
 		}
 		
-		Color<float> color_from_ray(Ray r) const;
+		Color<float> color_from_ray(const Ray& r) const;
 		void raytracing() const;
 		
-		Color<float> recursive_color_from_ray(Ray r, float coeff, unsigned counter) const;
+		Color<float> recursive_color_from_ray(const Ray& r, float coeff, unsigned counter) const;
 		void recursive_raytracing() const;
 		
 	private:
