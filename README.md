@@ -1,10 +1,10 @@
-#Projet IN204 - Lancer de rayons
+# Projet IN204 - Lancer de rayons
 
-####Par Marie Kalouguine et Davy Simeu
+#### Par Marie Kalouguine et Davy Simeu
 
 ![Image de plusieurs boules dont une réfléchissante sur un sol quadrillé](./images/image1.png)
 
-##Description du projet
+## Description du projet
 
 Ce projet qui a été mené sur plusieurs mois consistait à implémenter en C++ un algorithme de lancer de rayons fiable et efficace pour synthétiser des "photos" d'objets tridimensionnels. La donnée des objectifs se décline comme suit :
 
@@ -17,8 +17,8 @@ Il s'agit de réaliser un code de calcul de lancer de rayons.
 
 Ces objectifs ont été atteints au cours du projet, et l'image affichée en tête de ce fichier a été réalisée avec le code que nous avons écrit.
 
-##Utilisation du code pour synthétiser des images
-####Consignes utilisateur
+## Utilisation du code pour synthétiser des images
+#### Consignes utilisateur
 
 Le projet a été réalisé sous une distribution Linux et pour Linux, il est donc recommandé d'en être équipé pour tester le code. La compilation nécessite un compilateur C++11.
 
@@ -110,7 +110,7 @@ Voici par exemple le fichier XML qui a servi à synthétiser l'image en tête du
 > **Attention :**  Le code permettant de lire le fichier xml ne contient pas encore de vérification quant au respect de la syntaxe.  
 Un fichier mal écrit a de fortes chances de mener à une *Segmentation Fault*.
 
-##Structure du projet
+## Structure du projet
 
  **L'algorithme théorique :** 
 
@@ -176,7 +176,7 @@ Cette classe comporte les méthodes suivantes :
 	* `Color<float> color_from_ray(Ray r) const` et `void raytracing() const` ont les mêmes rôles, mais n'implémentent pas la récursivité. Ce sont des restes de quand l'algorithme n'implémentait pas encore la réflexion.
 
 
-##Améliorations possibles
+## Améliorations possibles
 
 Le projet est loin d'être parfait, et il reste encore beaucoup à faire pour obtenir un lancer de rayons complet. Voici quelques idées pour poursuivre le projet :
 
